@@ -1,0 +1,1608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1502E55F-A6D6-490F-8AE9-2E83F768BE44}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EPiServer.Commerce.Sample</RootNamespace>
+    <AssemblyName>EPiServer.Commerce.Sample</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>false</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <UseIISExpress>true</UseIISExpress>
+    <TargetFrameworkProfile />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Disable_CopyWebApplication>true</Disable_CopyWebApplication>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\EPiServerCommerceRules.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>3001,3002,3003</NoWarn>
+    <OutputPath>bin\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\EPiServerCommerceRules.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>3001,3002,3003,3009</NoWarn>
+    <OutputPath>bin\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="lang\" />
+    <Folder Include="modulesbin\" />
+    <Folder Include="Templates\Sample\Units\CatalogItemDetail\" />
+    <Folder Include="Templates\Sample\Units\CollaborativeFiltering\" />
+    <Folder Include="Templates\Sample\Units\Content\" />
+    <Folder Include="Templates\Sample\Units\Merchandising\" />
+    <Folder Include="Templates\Sample\Units\Personalization\" />
+    <Folder Include="Templates\Sample\Units\Social\" />
+    <Folder Include="Templates\UX\mcdx\img\" />
+    <Folder Include="Templates\UX\mcdx\js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuthorizedPageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseControls\BaseCatalogListControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseControls\CheckoutControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseControls\RendererBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BaseControls\SampleStoreUserControlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Business\Channels\DisplayResolutionBase.cs" />
+    <Compile Include="Business\Channels\DisplayResolutions.cs" />
+    <Compile Include="Business\Initialization\InitializationModule.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="ImportSiteContent.aspx.cs">
+      <DependentUpon>ImportSiteContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ImportSiteContent.aspx.designer.cs">
+      <DependentUpon>ImportSiteContent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Files\GenericFile.cs" />
+    <Compile Include="Helpers\AssetHelper.cs" />
+    <Compile Include="Helpers\MarketStorage.cs" />
+    <Compile Include="Helpers\SampleStoreHelper.cs" />
+    <Compile Include="Helpers\WarehouseHelper.cs" />
+    <Compile Include="Models\Files\ImageFile.cs" />
+    <Compile Include="Models\MetaDataClasses\AutomotiveItemContent.cs" />
+    <Compile Include="Models\MetaDataClasses\AutomotiveStoreSubLandingNodeContent.cs" />
+    <Compile Include="Models\MetaDataClasses\IInfoFeatures.cs" />
+    <Compile Include="Models\MetaDataClasses\IInfoDescription.cs" />
+    <Compile Include="Models\MetaDataClasses\DefaultBundleContent.cs" />
+    <Compile Include="Models\MetaDataClasses\DefaultPackageContent.cs" />
+    <Compile Include="Models\MetaDataClasses\IFacetBrand.cs" />
+    <Compile Include="Models\MetaDataClasses\IInfoModelNumber.cs" />
+    <Compile Include="Models\MetaDataClasses\SiteCategoryContent.cs" />
+    <Compile Include="Models\MetaDataClasses\DepartmentNodeWithItemsContent.cs" />
+    <Compile Include="Models\MetaDataClasses\DepartmentNodeWithProductsContent.cs" />
+    <Compile Include="Models\MetaDataClasses\DepartmentStoreLandingNodeContent.cs" />
+    <Compile Include="Models\MetaDataClasses\FashionStoreLandingNodeContent.cs" />
+    <Compile Include="Models\MetaDataClasses\FashionStoreSubLandingNodeContent.cs" />
+    <Compile Include="Models\MetaDataClasses\MediaStoreLandingNodeContent.cs" />
+    <Compile Include="Models\MetaDataClasses\MediaStoreSubLandingNodeContent.cs" />
+    <Compile Include="Models\MetaDataClasses\AutomotiveStoreLandingNodeContent.cs" />
+    <Compile Include="Models\MetaDataClasses\FashionItemContent.cs" />
+    <Compile Include="Models\MetaDataClasses\FashionProductContent.cs" />
+    <Compile Include="Models\MetaDataClasses\MediaItemContent.cs" />
+    <Compile Include="Models\MetaDataClasses\MediaProductContent.cs" />
+    <Compile Include="Models\MetaDataClasses\SiteSubCategoryContent.cs" />
+    <Compile Include="Models\MetaDataClasses\WineSKUContent.cs" />
+    <Compile Include="Models\MetaDataClasses\WineStoreLandingNodeContent.cs" />
+    <Compile Include="BaseControls\RendererControlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\MasterPages\Controls\MarketSelector.ascx.cs">
+      <DependentUpon>MarketSelector.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\MasterPages\Controls\MarketSelector.ascx.designer.cs">
+      <DependentUpon>MarketSelector.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\MasterPages\Controls\LoginSelector.ascx.cs">
+      <DependentUpon>LoginSelector.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\MasterPages\Controls\LoginSelector.ascx.designer.cs">
+      <DependentUpon>LoginSelector.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\MasterPages\Controls\NavAccountBar.ascx.cs">
+      <DependentUpon>NavAccountBar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\MasterPages\Controls\NavAccountBar.ascx.designer.cs">
+      <DependentUpon>NavAccountBar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\MasterPages\StarterDemoDefault.Master.cs">
+      <DependentUpon>StarterDemoDefault.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\MasterPages\StarterDemoDefault.Master.designer.cs">
+      <DependentUpon>StarterDemoDefault.Master</DependentUpon>
+    </Compile>
+    <Content Include="ImportSiteContent.aspx" />
+    <Content Include="modules\_protected\Shell\web.config" />
+    <Content Include="modules\_protected\Shell\EPiServer.Shell.UI.zip" />
+    <Content Include="modules\_protected\CMS\web.config" />
+    <Content Include="modules\_protected\CMS\EPiServer.Cms.Shell.UI.zip" />
+    <Content Include="modules\_protected\EPiServer.Commerce.UI\EPiServer.Commerce.UI.zip" />
+    <Content Include="modules\_protected\EPiServer.Commerce.Shell\EPiServer.Commerce.Shell.zip" />
+    <Content Include="modules\_protected\EPiServer.Commerce.Shell.ManagerIntegration\EPiServer.Commerce.Shell.ManagerIntegration.zip" />
+    <Content Include="Configs\baf.config" />
+    <Content Include="Configs\baf.data.manager.config" />
+    <Content Include="Configs\baf.data.metaobject.config" />
+    <Content Include="Configs\baf.library.folders.config" />
+    <Content Include="Configs\ecf.app.config" />
+    <Content Include="Configs\ecf.asset.config" />
+    <Content Include="Configs\ecf.catalog.config" />
+    <Content Include="Configs\ecf.cms.config" />
+    <Content Include="Configs\ecf.customer.config" />
+    <Content Include="Configs\ecf.customization.config" />
+    <Content Include="Configs\ecf.marketing.config" />
+    <Content Include="Configs\ecf.order.config" />
+    <Content Include="Configs\ecf.security.config" />
+    <Content Include="Configs\ecf.ssl.config" />
+    <Content Include="Configs\ecf.workflow.config" />
+    <Content Include="Configs\Mediachase.Search.config" />
+    <None Include="Properties\AssemblyInfo.cs.template" />
+    <Compile Include="Templates\Sample\Pages\CartSimpleModule.aspx.cs">
+      <DependentUpon>CartSimpleModule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\CartSimpleModule.aspx.designer.cs">
+      <DependentUpon>CartSimpleModule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ChangeAccountInfo.aspx.cs">
+      <DependentUpon>ChangeAccountInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ChangeAccountInfo.aspx.designer.cs">
+      <DependentUpon>ChangeAccountInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\CheckoutConfirmationStep.aspx.cs">
+      <DependentUpon>CheckoutConfirmationStep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\CheckoutConfirmationStep.aspx.designer.cs">
+      <DependentUpon>CheckoutConfirmationStep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\MarketNotSupported.aspx.cs">
+      <DependentUpon>MarketNotSupported.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\MarketNotSupported.aspx.designer.cs">
+      <DependentUpon>MarketNotSupported.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\BundleDetail.aspx.cs">
+      <DependentUpon>BundleDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\BundleDetail.aspx.designer.cs">
+      <DependentUpon>BundleDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\CatalogDetail.aspx.cs">
+      <DependentUpon>CatalogDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\CatalogDetail.aspx.designer.cs">
+      <DependentUpon>CatalogDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\PackageDetail.aspx.cs">
+      <DependentUpon>PackageDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\PackageDetail.aspx.designer.cs">
+      <DependentUpon>PackageDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\EntryContentDetail.aspx.cs">
+      <DependentUpon>EntryContentDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\EntryContentDetail.aspx.designer.cs">
+      <DependentUpon>EntryContentDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\NodeDetail.aspx.cs">
+      <DependentUpon>NodeDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\NodeDetail.aspx.designer.cs">
+      <DependentUpon>NodeDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\SiteSubCategoryTemplate.aspx.cs">
+      <DependentUpon>SiteSubCategoryTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\SiteSubCategoryTemplate.aspx.designer.cs">
+      <DependentUpon>SiteSubCategoryTemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\SiteCategoryTemplate.aspx.cs">
+      <DependentUpon>SiteCategoryTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\SiteCategoryTemplate.aspx.designer.cs">
+      <DependentUpon>SiteCategoryTemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Warehouses.aspx.cs">
+      <DependentUpon>Warehouses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Warehouses.aspx.designer.cs">
+      <DependentUpon>Warehouses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\VariationDetail.aspx.cs">
+      <DependentUpon>VariationDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\VariationDetail.aspx.designer.cs">
+      <DependentUpon>VariationDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\MediaProductDetail.aspx.cs">
+      <DependentUpon>MediaProductDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\MediaProductDetail.aspx.designer.cs">
+      <DependentUpon>MediaProductDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\FashionProductDetail.aspx.cs">
+      <DependentUpon>FashionProductDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductDetail\FashionProductDetail.aspx.designer.cs">
+      <DependentUpon>FashionProductDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\DepartmentNodeWithItems.aspx.cs">
+      <DependentUpon>DepartmentNodeWithItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\DepartmentNodeWithItems.aspx.designer.cs">
+      <DependentUpon>DepartmentNodeWithItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\DepartmentNodeWithProducts.aspx.cs">
+      <DependentUpon>DepartmentNodeWithProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ProductListing\DepartmentNodeWithProducts.aspx.designer.cs">
+      <DependentUpon>DepartmentNodeWithProducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ShoppingOverview.aspx.cs">
+      <DependentUpon>ShoppingOverview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\ShoppingOverview.aspx.designer.cs">
+      <DependentUpon>ShoppingOverview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\WishList.aspx.cs">
+      <DependentUpon>WishList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\WishList.aspx.designer.cs">
+      <DependentUpon>WishList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\EditAddress.aspx.cs">
+      <DependentUpon>EditAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\EditAddress.aspx.designer.cs">
+      <DependentUpon>EditAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\MultiShipmentCheckout.aspx.cs">
+      <DependentUpon>MultiShipmentCheckout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\MultiShipmentCheckout.aspx.designer.cs">
+      <DependentUpon>MultiShipmentCheckout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\OrderDetails.aspx.cs">
+      <DependentUpon>OrderDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\OrderDetails.aspx.designer.cs">
+      <DependentUpon>OrderDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Orders.aspx.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Orders.aspx.designer.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Account.aspx.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Account.aspx.designer.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Addresses.aspx.cs">
+      <DependentUpon>Addresses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Addresses.aspx.designer.cs">
+      <DependentUpon>Addresses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\PrivacySettings.aspx.cs">
+      <DependentUpon>PrivacySettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\PrivacySettings.aspx.designer.cs">
+      <DependentUpon>PrivacySettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\SearchingByNarrowing.aspx.cs">
+      <DependentUpon>SearchingByNarrowing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\SearchingByNarrowing.aspx.designer.cs">
+      <DependentUpon>SearchingByNarrowing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\SingleShipmentCheckout.aspx.cs">
+      <DependentUpon>SingleShipmentCheckout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\SingleShipmentCheckout.aspx.designer.cs">
+      <DependentUpon>SingleShipmentCheckout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\SocialAPI.aspx.cs">
+      <DependentUpon>SocialAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Pages\SocialAPI.aspx.designer.cs">
+      <DependentUpon>SocialAPI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\PageTypes\CartSimpleModulePage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\ChangePasswordPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\CommerceSampleModulePage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\MarketNotSupported.cs" />
+    <Compile Include="Templates\Sample\PageTypes\SettingsBlock.cs" />
+    <Compile Include="Templates\Sample\PageTypes\WarehousesPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\ShoppingOverviewPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\WishListPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\DefaultPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\ChangeAccountInfoPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\AccountPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\AddressPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\EditAddressPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\LoginPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\MultiShipmentCheckoutPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\OrderDetailsPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\PrivacySettingsPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\SearchingByNarrowingPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\SearchPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\HomePage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\CommerceSamplePage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\SingleShipmentCheckoutPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\SocialAPIPage.cs" />
+    <Compile Include="Templates\Sample\PageTypes\OrdersPage.cs" />
+    <Compile Include="Templates\Sample\Units\AccountManagement\ChangeAccountInfo.ascx.cs">
+      <DependentUpon>ChangeAccountInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\ChangeAccountInfo.ascx.designer.cs">
+      <DependentUpon>ChangeAccountInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\ChangePassword.ascx.cs">
+      <DependentUpon>ChangePassword.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\ChangePassword.ascx.designer.cs">
+      <DependentUpon>ChangePassword.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\Controls\SideNav.ascx.cs">
+      <DependentUpon>SideNav.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\Controls\SideNav.ascx.designer.cs">
+      <DependentUpon>SideNav.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetailsSingleShipment.ascx.cs">
+      <DependentUpon>OrderDetailsSingleShipment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetailsSingleShipment.ascx.designer.cs">
+      <DependentUpon>OrderDetailsSingleShipment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\CouponsInfo.ascx.cs">
+      <DependentUpon>CouponsInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\CouponsInfo.ascx.designer.cs">
+      <DependentUpon>CouponsInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\MultiShipmentDetails.ascx.cs">
+      <DependentUpon>MultiShipmentDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\MultiShipmentDetails.ascx.designer.cs">
+      <DependentUpon>MultiShipmentDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\MultiShipmentOrderSubTotal.ascx.cs">
+      <DependentUpon>MultiShipmentOrderSubTotal.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\MultiShipmentOrderSubTotal.ascx.designer.cs">
+      <DependentUpon>MultiShipmentOrderSubTotal.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\OrderAddressInfo.ascx.cs">
+      <DependentUpon>OrderAddressInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\OrderAddressInfo.ascx.designer.cs">
+      <DependentUpon>OrderAddressInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\PaymentInfo.ascx.cs">
+      <DependentUpon>PaymentInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\PaymentInfo.ascx.designer.cs">
+      <DependentUpon>PaymentInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\ShippingMethodInfo.ascx.cs">
+      <DependentUpon>ShippingMethodInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\ShippingMethodInfo.ascx.designer.cs">
+      <DependentUpon>ShippingMethodInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\YourWishList.ascx.cs">
+      <DependentUpon>YourWishList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\YourWishList.ascx.designer.cs">
+      <DependentUpon>YourWishList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\EditAddress.ascx.cs">
+      <DependentUpon>EditAddress.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\EditAddress.ascx.designer.cs">
+      <DependentUpon>EditAddress.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetailsMultiShipment.ascx.cs">
+      <DependentUpon>OrderDetailsMultiShipment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetailsMultiShipment.ascx.designer.cs">
+      <DependentUpon>OrderDetailsMultiShipment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\PrivacySettings.ascx.cs">
+      <DependentUpon>PrivacySettings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\PrivacySettings.ascx.designer.cs">
+      <DependentUpon>PrivacySettings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\YourAccount.ascx.cs">
+      <DependentUpon>YourAccount.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\YourAccount.ascx.designer.cs">
+      <DependentUpon>YourAccount.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\YourAddresses.ascx.cs">
+      <DependentUpon>YourAddresses.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\YourAddresses.ascx.designer.cs">
+      <DependentUpon>YourAddresses.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\YourOrders.ascx.cs">
+      <DependentUpon>YourOrders.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\YourOrders.ascx.designer.cs">
+      <DependentUpon>YourOrders.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\CartSimpleModule.ascx.cs">
+      <DependentUpon>CartSimpleModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\CartSimpleModule.ascx.designer.cs">
+      <DependentUpon>CartSimpleModule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\CheckoutModule.ascx.cs">
+      <DependentUpon>CheckoutModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\CheckoutModule.ascx.designer.cs">
+      <DependentUpon>CheckoutModule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\MultiShipmentCheckout.ascx.cs">
+      <DependentUpon>MultiShipmentCheckout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\MultiShipmentCheckout.ascx.designer.cs">
+      <DependentUpon>MultiShipmentCheckout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\OrderSubtotalSimpleInfo.ascx.cs">
+      <DependentUpon>OrderSubtotalSimpleInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\OrderSubtotalSimpleInfo.ascx.designer.cs">
+      <DependentUpon>OrderSubtotalSimpleInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\LineItemsSimpleInfo.ascx.cs">
+      <DependentUpon>LineItemsSimpleInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\AccountManagement\OrderDetail\LineItemsSimpleInfo.ascx.designer.cs">
+      <DependentUpon>LineItemsSimpleInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\AddressControl.ascx.cs">
+      <DependentUpon>AddressControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\AddressControl.ascx.designer.cs">
+      <DependentUpon>AddressControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\ApplyCoupons.ascx.cs">
+      <DependentUpon>ApplyCoupons.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\ApplyCoupons.ascx.designer.cs">
+      <DependentUpon>ApplyCoupons.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\CartAddressView.ascx.cs">
+      <DependentUpon>CartAddressView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\CartAddressView.ascx.designer.cs">
+      <DependentUpon>CartAddressView.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\ErrorModalModule.ascx.cs">
+      <DependentUpon>ErrorModalModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\ErrorModalModule.ascx.designer.cs">
+      <DependentUpon>ErrorModalModule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\LineItemsMultiView.ascx.cs">
+      <DependentUpon>LineItemsMultiView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\LineItemsMultiView.ascx.designer.cs">
+      <DependentUpon>LineItemsMultiView.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\OrderSubtotalMultiView.ascx.cs">
+      <DependentUpon>OrderSubtotalMultiView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\OrderSubtotalMultiView.ascx.designer.cs">
+      <DependentUpon>OrderSubtotalMultiView.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\EntryQuantityControl.ascx.cs">
+      <DependentUpon>EntryQuantityControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\EntryQuantityControl.ascx.designer.cs">
+      <DependentUpon>EntryQuantityControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\ErrorModule.ascx.cs">
+      <DependentUpon>ErrorModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\ErrorModule.ascx.designer.cs">
+      <DependentUpon>ErrorModule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\LineItemsSimpleView.ascx.cs">
+      <DependentUpon>LineItemsSimpleView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\LineItemsSimpleView.ascx.designer.cs">
+      <DependentUpon>LineItemsSimpleView.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\OrderSubtotalSimpleView.ascx.cs">
+      <DependentUpon>OrderSubtotalSimpleView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\OrderSubtotalSimpleView.ascx.designer.cs">
+      <DependentUpon>OrderSubtotalSimpleView.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\Authorize\PaymentMethod.ascx.cs">
+      <DependentUpon>PaymentMethod.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\Authorize\PaymentMethod.ascx.designer.cs">
+      <DependentUpon>PaymentMethod.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\Generic\PaymentMethod.ascx.cs">
+      <DependentUpon>PaymentMethod.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\Generic\PaymentMethod.ascx.designer.cs">
+      <DependentUpon>PaymentMethod.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\PaymentOptions.ascx.cs">
+      <DependentUpon>PaymentOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\PaymentOptions.ascx.designer.cs">
+      <DependentUpon>PaymentOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\SplitShipmentControl.ascx.cs">
+      <DependentUpon>SplitShipmentControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SharedModules\SplitShipmentControl.ascx.designer.cs">
+      <DependentUpon>SplitShipmentControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SingleShipmentCheckout.ascx.cs">
+      <DependentUpon>SingleShipmentCheckout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CartCheckout\SingleShipmentCheckout.ascx.designer.cs">
+      <DependentUpon>SingleShipmentCheckout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SiteCatalogControl.ascx.cs">
+      <DependentUpon>SiteCatalogControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SiteCatalogControl.ascx.designer.cs">
+      <DependentUpon>SiteCatalogControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\DepartmentNodeWithEntries.ascx.cs">
+      <DependentUpon>DepartmentNodeWithEntries.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\DepartmentNodeWithEntries.ascx.designer.cs">
+      <DependentUpon>DepartmentNodeWithEntries.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CommonButtons.ascx.cs">
+      <DependentUpon>CommonButtons.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CommonButtons.ascx.designer.cs">
+      <DependentUpon>CommonButtons.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CategoryTopMenu.ascx.cs">
+      <DependentUpon>CategoryTopMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CategoryTopMenu.ascx.designer.cs">
+      <DependentUpon>CategoryTopMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CommonNodeList.ascx.cs">
+      <DependentUpon>CommonNodeList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CommonNodeList.ascx.designer.cs">
+      <DependentUpon>CommonNodeList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CommonPricingInfo.ascx.cs">
+      <DependentUpon>CommonPricingInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CommonPricingInfo.ascx.designer.cs">
+      <DependentUpon>CommonPricingInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SiteCategoryControl.ascx.cs">
+      <DependentUpon>SiteCategoryControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SiteCategoryControl.ascx.designer.cs">
+      <DependentUpon>SiteCategoryControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SiteSubCategoryControl.ascx.cs">
+      <DependentUpon>SiteSubCategoryControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\CategoryDisplay\SiteSubCategoryControl.ascx.designer.cs">
+      <DependentUpon>SiteSubCategoryControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Navigation\PagingMenu.ascx.cs">
+      <DependentUpon>PagingMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Navigation\PagingMenu.ascx.designer.cs">
+      <DependentUpon>PagingMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Navigation\SubMenu.ascx.cs">
+      <DependentUpon>SubMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Navigation\SubMenu.ascx.designer.cs">
+      <DependentUpon>SubMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Navigation\Toolbar.ascx.cs">
+      <DependentUpon>Toolbar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Navigation\Toolbar.ascx.designer.cs">
+      <DependentUpon>Toolbar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Navigation\TopMenu.ascx.cs">
+      <DependentUpon>TopMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Navigation\TopMenu.ascx.designer.cs">
+      <DependentUpon>TopMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\Clothing\ClothingProductDisplayTemplate.ascx.cs">
+      <DependentUpon>ClothingProductDisplayTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\Clothing\ClothingProductDisplayTemplate.ascx.designer.cs">
+      <DependentUpon>ClothingProductDisplayTemplate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\Clothing\ClothingProductItemSelector.ascx.cs">
+      <DependentUpon>ClothingProductItemSelector.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\Clothing\ClothingProductItemSelector.ascx.designer.cs">
+      <DependentUpon>ClothingProductItemSelector.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\CommonModule.ascx.cs">
+      <DependentUpon>CommonModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\CommonModule.ascx.designer.cs">
+      <DependentUpon>CommonModule.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\SimpleProductInfo.ascx.cs">
+      <DependentUpon>SimpleProductInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\SimpleProductInfo.ascx.designer.cs">
+      <DependentUpon>SimpleProductInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductWarehouseInfo.ascx.cs">
+      <DependentUpon>ProductWarehouseInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductWarehouseInfo.ascx.designer.cs">
+      <DependentUpon>ProductWarehouseInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\VariationDetails.ascx.cs">
+      <DependentUpon>VariationDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\VariationDetails.ascx.designer.cs">
+      <DependentUpon>VariationDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\VariationPriceInfo.ascx.cs">
+      <DependentUpon>VariationPriceInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\VariationPriceInfo.ascx.designer.cs">
+      <DependentUpon>VariationPriceInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\Movies\MovieProductDisplayTemplate.ascx.cs">
+      <DependentUpon>MovieProductDisplayTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\Movies\MovieProductDisplayTemplate.ascx.designer.cs">
+      <DependentUpon>MovieProductDisplayTemplate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\Movies\MovieProductItemSelector.ascx.cs">
+      <DependentUpon>MovieProductItemSelector.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\Movies\MovieProductItemSelector.ascx.designer.cs">
+      <DependentUpon>MovieProductItemSelector.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductImages\CommonProductImages.ascx.cs">
+      <DependentUpon>CommonProductImages.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductImages\CommonProductImages.ascx.designer.cs">
+      <DependentUpon>CommonProductImages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductInfoPricing\CommonProductInfoPricing.ascx.cs">
+      <DependentUpon>CommonProductInfoPricing.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductInfoPricing\CommonProductInfoPricing.ascx.designer.cs">
+      <DependentUpon>CommonProductInfoPricing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductInfoPricing\CommonItemInfoPricing.ascx.cs">
+      <DependentUpon>CommonItemInfoPricing.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductInfoPricing\CommonItemInfoPricing.ascx.designer.cs">
+      <DependentUpon>CommonItemInfoPricing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\AddToCart.ascx.cs">
+      <DependentUpon>AddToCart.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\AddToCart.ascx.designer.cs">
+      <DependentUpon>AddToCart.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductInfoPricing\ProductPriceDetails.ascx.cs">
+      <DependentUpon>ProductPriceDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductInfoPricing\ProductPriceDetails.ascx.designer.cs">
+      <DependentUpon>ProductPriceDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductPromotions.ascx.cs">
+      <DependentUpon>ProductPromotions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductPromotions.ascx.designer.cs">
+      <DependentUpon>ProductPromotions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductSocial\CommonProductSocial.ascx.cs">
+      <DependentUpon>CommonProductSocial.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductSocial\CommonProductSocial.ascx.designer.cs">
+      <DependentUpon>CommonProductSocial.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\RelatedProducts.ascx.cs">
+      <DependentUpon>RelatedProducts.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\SharedModules\RelatedProducts.ascx.designer.cs">
+      <DependentUpon>RelatedProducts.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\VariationSelector.ascx.cs">
+      <DependentUpon>VariationSelector.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\ProductDetail\VariationSelector.ascx.designer.cs">
+      <DependentUpon>VariationSelector.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Searching\facet-filtering.ascx.cs">
+      <DependentUpon>facet-filtering.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Searching\facet-filtering.ascx.designer.cs">
+      <DependentUpon>facet-filtering.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Searching\keyword-search.ascx.cs">
+      <DependentUpon>keyword-search.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Searching\keyword-search.ascx.designer.cs">
+      <DependentUpon>keyword-search.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Searching\SearchingByNarrowing.ascx.cs">
+      <DependentUpon>SearchingByNarrowing.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Searching\SearchingByNarrowing.ascx.designer.cs">
+      <DependentUpon>SearchingByNarrowing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Security\Login.ascx.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Security\Login.ascx.designer.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Shopping\CatalogNodeList.ascx.cs">
+      <DependentUpon>CatalogNodeList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Shopping\CatalogNodeList.ascx.designer.cs">
+      <DependentUpon>CatalogNodeList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Warehouse\WarehouseDetails.ascx.cs">
+      <DependentUpon>WarehouseDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Warehouse\WarehouseDetails.ascx.designer.cs">
+      <DependentUpon>WarehouseDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Warehouse\WarehouseList.ascx.cs">
+      <DependentUpon>WarehouseList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Templates\Sample\Units\Warehouse\WarehouseList.ascx.designer.cs">
+      <DependentUpon>WarehouseList.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Templates\Sample\images\review-0stars.gif" />
+    <Content Include="Templates\Sample\images\review-1stars.gif" />
+    <Content Include="Templates\Sample\images\review-2stars.gif" />
+    <Content Include="Templates\Sample\images\review-3stars.gif" />
+    <Content Include="Templates\Sample\images\review-4stars.gif" />
+    <Content Include="Templates\Sample\images\review-5stars.gif" />
+    <Content Include="Templates\Sample\images\review-average-0stars.gif" />
+    <Content Include="Templates\Sample\images\review-average-1stars.gif" />
+    <Content Include="Templates\Sample\images\review-average-2stars.gif" />
+    <Content Include="Templates\Sample\images\review-average-3stars.gif" />
+    <Content Include="Templates\Sample\images\review-average-4stars.gif" />
+    <Content Include="Templates\Sample\images\review-average-5stars.gif" />
+    <Content Include="Templates\Sample\MasterPages\Controls\MarketSelector.ascx" />
+    <Content Include="Templates\Sample\MasterPages\Controls\LoginSelector.ascx" />
+    <Content Include="Templates\Sample\MasterPages\Controls\NavAccountBar.ascx" />
+    <Content Include="Templates\Sample\Pages\CartSimpleModule.aspx" />
+    <Content Include="Templates\Sample\Pages\ChangeAccountInfo.aspx" />
+    <Content Include="Templates\Sample\Pages\ChangePassword.aspx" />
+    <Content Include="Templates\Sample\Pages\CheckoutConfirmationStep.aspx" />
+    <Content Include="Templates\Sample\Pages\MarketNotSupported.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductDetail\BundleDetail.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductListing\CatalogDetail.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductDetail\PackageDetail.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductDetail\EntryContentDetail.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductListing\NodeDetail.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductListing\SiteSubCategoryTemplate.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductListing\SiteCategoryTemplate.aspx" />
+    <Content Include="Templates\Sample\Pages\Warehouses.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductDetail\VariationDetail.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductDetail\MediaProductDetail.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductDetail\FashionProductDetail.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductListing\DepartmentNodeWithItems.aspx" />
+    <Content Include="Templates\Sample\Pages\ProductListing\DepartmentNodeWithProducts.aspx" />
+    <Content Include="Templates\Sample\Pages\ShoppingOverview.aspx" />
+    <Content Include="Templates\Sample\Pages\WishList.aspx" />
+    <Content Include="Templates\Sample\Pages\EditAddress.aspx" />
+    <Content Include="Templates\Sample\Pages\Login.aspx" />
+    <Content Include="Templates\Sample\Pages\MultiShipmentCheckout.aspx" />
+    <Content Include="Templates\Sample\Pages\OrderDetails.aspx" />
+    <Content Include="Templates\Sample\Pages\Orders.aspx" />
+    <Content Include="Templates\Sample\Pages\Account.aspx" />
+    <Content Include="Templates\Sample\Pages\Addresses.aspx" />
+    <Content Include="Templates\Sample\Pages\PrivacySettings.aspx" />
+    <Content Include="Templates\Sample\Pages\Home.aspx" />
+    <Content Include="Templates\Sample\Pages\Default.aspx" />
+    <Content Include="Templates\Sample\Pages\Search.aspx" />
+    <Content Include="Templates\Sample\Pages\SearchingByNarrowing.aspx" />
+    <Content Include="Templates\Sample\Pages\SingleShipmentCheckout.aspx" />
+    <Content Include="Templates\Sample\Pages\SocialAPI.aspx" />
+    <Content Include="Templates\Sample\SocialIcons\aim.png" />
+    <Content Include="Templates\Sample\SocialIcons\ask.png" />
+    <Content Include="Templates\Sample\SocialIcons\bebo.png" />
+    <Content Include="Templates\Sample\SocialIcons\betvibes.png" />
+    <Content Include="Templates\Sample\SocialIcons\blinklist.png" />
+    <Content Include="Templates\Sample\SocialIcons\blogger.png" />
+    <Content Include="Templates\Sample\SocialIcons\buzz.png" />
+    <Content Include="Templates\Sample\SocialIcons\delicious.png" />
+    <Content Include="Templates\Sample\SocialIcons\deviantart.png" />
+    <Content Include="Templates\Sample\SocialIcons\digg.png" />
+    <Content Include="Templates\Sample\SocialIcons\diigo.png" />
+    <Content Include="Templates\Sample\SocialIcons\everynote.png" />
+    <Content Include="Templates\Sample\SocialIcons\facebook.png" />
+    <Content Include="Templates\Sample\SocialIcons\flickr.png" />
+    <Content Include="Templates\Sample\SocialIcons\friendfeed.png" />
+    <Content Include="Templates\Sample\SocialIcons\friendster.png" />
+    <Content Include="Templates\Sample\SocialIcons\furl.png" />
+    <Content Include="Templates\Sample\SocialIcons\google.png" />
+    <Content Include="Templates\Sample\SocialIcons\lastfm.png" />
+    <Content Include="Templates\Sample\SocialIcons\linkedin.png" />
+    <Content Include="Templates\Sample\SocialIcons\livejournal.png" />
+    <Content Include="Templates\Sample\SocialIcons\mixx.png" />
+    <Content Include="Templates\Sample\SocialIcons\myspace.png" />
+    <Content Include="Templates\Sample\SocialIcons\newsvine.png" />
+    <Content Include="Templates\Sample\SocialIcons\orkut.png" />
+    <Content Include="Templates\Sample\SocialIcons\Pinterest.png" />
+    <Content Include="Templates\Sample\SocialIcons\plaxo.png" />
+    <Content Include="Templates\Sample\SocialIcons\plurk.png" />
+    <Content Include="Templates\Sample\SocialIcons\posterous.png" />
+    <Content Include="Templates\Sample\SocialIcons\reddit.png" />
+    <Content Include="Templates\Sample\SocialIcons\rss.png" />
+    <Content Include="Templates\Sample\SocialIcons\shoutwire.png" />
+    <Content Include="Templates\Sample\SocialIcons\spurl.png" />
+    <Content Include="Templates\Sample\SocialIcons\squidoo.png" />
+    <Content Include="Templates\Sample\SocialIcons\stumbleupon.png" />
+    <Content Include="Templates\Sample\SocialIcons\technorati.png" />
+    <Content Include="Templates\Sample\SocialIcons\tumblr.png" />
+    <Content Include="Templates\Sample\SocialIcons\twitter.png" />
+    <Content Include="Templates\Sample\SocialIcons\vimeo.png" />
+    <Content Include="Templates\Sample\SocialIcons\wordpress.png" />
+    <Content Include="Templates\Sample\SocialIcons\xanga.png" />
+    <Content Include="Templates\Sample\SocialIcons\yahoo.png" />
+    <Content Include="Templates\Sample\SocialIcons\youtube.png" />
+    <Content Include="Templates\Sample\Units\AccountManagement\ChangeAccountInfo.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\ChangePassword.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\Controls\SideNav.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetailsSingleShipment.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetail\CouponsInfo.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetail\MultiShipmentDetails.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetail\MultiShipmentOrderSubTotal.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetail\OrderAddressInfo.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetail\PaymentInfo.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetail\ShippingMethodInfo.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\YourWishList.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\EditAddress.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetailsMultiShipment.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\PrivacySettings.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\YourAccount.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\YourAddresses.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\YourOrders.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\CartSimpleModule.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\CheckoutModule.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\MultiShipmentCheckout.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetail\OrderSubtotalSimpleInfo.ascx" />
+    <Content Include="Templates\Sample\Units\AccountManagement\OrderDetail\LineItemsSimpleInfo.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\AddressControl.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\ApplyCoupons.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\CartAddressView.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\ErrorModalModule.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\LineItemsMultiView.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\OrderSubtotalMultiView.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\EntryQuantityControl.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\ErrorModule.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\LineItemsSimpleView.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\OrderSubtotalSimpleView.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\Authorize\PaymentMethod.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\Generic\PaymentMethod.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\PaymentOptions.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SharedModules\SplitShipmentControl.ascx" />
+    <Content Include="Templates\Sample\Units\CartCheckout\SingleShipmentCheckout.ascx" />
+    <Content Include="Templates\Sample\Units\CategoryDisplay\SiteCatalogControl.ascx" />
+    <Content Include="Templates\Sample\Units\CategoryDisplay\DepartmentNodeWithEntries.ascx" />
+    <Content Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CommonButtons.ascx" />
+    <Content Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CategoryTopMenu.ascx" />
+    <Content Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CommonNodeList.ascx" />
+    <Content Include="Templates\Sample\Units\CategoryDisplay\SharedModules\CommonPricingInfo.ascx" />
+    <Content Include="Templates\Sample\Units\CategoryDisplay\SiteCategoryControl.ascx" />
+    <Content Include="Templates\Sample\Units\CategoryDisplay\SiteSubCategoryControl.ascx" />
+    <Content Include="Templates\Sample\Units\Navigation\PagingMenu.ascx" />
+    <Content Include="Templates\Sample\Units\Navigation\SubMenu.ascx" />
+    <Content Include="Templates\Sample\Units\Navigation\Toolbar.ascx" />
+    <Content Include="Templates\Sample\Units\Navigation\TopMenu.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\Clothing\ClothingProductDisplayTemplate.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\Clothing\ClothingProductItemSelector.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\CommonModule.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\SimpleProductInfo.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductWarehouseInfo.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\VariationDetails.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\VariationPriceInfo.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\Movies\MovieProductDisplayTemplate.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\Movies\MovieProductItemSelector.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductImages\CommonProductImages.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductInfoPricing\CommonProductInfoPricing.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductInfoPricing\CommonItemInfoPricing.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\AddToCart.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductInfoPricing\ProductPriceDetails.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductPromotions.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\ProductSocial\CommonProductSocial.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\SharedModules\RelatedProducts.ascx" />
+    <Content Include="Templates\Sample\Units\ProductDetail\VariationSelector.ascx" />
+    <Content Include="Templates\Sample\Units\Searching\facet-filtering.ascx" />
+    <Content Include="Templates\Sample\Units\Searching\keyword-search.ascx" />
+    <Content Include="Templates\Sample\Units\Searching\SearchingByNarrowing.ascx" />
+    <Content Include="Templates\Sample\Units\Security\Login.ascx" />
+    <Content Include="Templates\Sample\Units\Shopping\CatalogNodeList.ascx" />
+    <Content Include="Templates\Sample\Units\Warehouse\WarehouseDetails.ascx" />
+    <Content Include="Templates\Sample\Units\Warehouse\WarehouseList.ascx" />
+    <Content Include="Templates\UX\bootstrap3\css\bootstrap-theme.css" />
+    <Content Include="Templates\UX\bootstrap3\css\bootstrap-theme.min.css" />
+    <Content Include="Templates\UX\bootstrap3\css\bootstrap.css" />
+    <Content Include="Templates\UX\bootstrap3\css\bootstrap.min.css" />
+    <Content Include="Templates\UX\bootstrap3\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Templates\UX\bootstrap3\ico\apple-touch-icon.png" />
+    <Content Include="Templates\UX\bootstrap3\ico\fav.png" />
+    <Content Include="Templates\UX\bootstrap3\js\bootstrap.js" />
+    <Content Include="Templates\UX\bootstrap3\js\bootstrap.min.js" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-automotive-node.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-automotive-sub-node.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-automotive.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-department-store.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-fashion-node.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-fashion-sub-node.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-fashion.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-media-node.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-media-sub-node.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-media.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-product-list.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-variant-list.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-wine-node.png" />
+    <Content Include="Templates\UX\gfx\page-type-thumbnail-wine.png" />
+    <Content Include="Templates\UX\js\sample_plugin.js" />
+    <Content Include="Templates\UX\js\jquery.js" />
+    <Content Include="Templates\UX\mcdx\css\commerce.css" />
+    <Content Include="Templates\UX\mcdx\css\master.css" />
+    <Content Include="Templates\UX\mcdx\jquery-tmpl\jquery.tmpl.js" />
+    <Content Include="Templates\UX\mcdx\jquery-tmpl\jquery.tmpl.min.js" />
+    <Content Include="Templates\UX\mcdx\jquery-tmpl\jquery.tmplPlus.js" />
+    <Content Include="Templates\UX\mcdx\jquery-tmpl\jquery.tmplPlus.min.js" />
+    <Content Include="Templates\UX\mcdx\mbextruder\css\mbExtruder.css" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\black_op_30.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\blue_op_75.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\extruder_bgnd.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\extruder_blank.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\extruder_bottom.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\extruder_flap.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\extruder_header_bgnd.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\extruder_left.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\extruder_left_flap.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\extruder_voice.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\extruder_voiceHover.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\fuzz.gif" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\optionsPanel.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\orange_op_75.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\red_op_50.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\elements\settingsBtn.png" />
+    <Content Include="Templates\UX\mcdx\mbextruder\inc\changeLog.txt" />
+    <Content Include="Templates\UX\mcdx\mbextruder\inc\jquery.hoverIntent.min.js" />
+    <Content Include="Templates\UX\mcdx\mbextruder\inc\jquery.mb.flipText.js" />
+    <Content Include="Templates\UX\mcdx\mbextruder\inc\jquery.metadata.js" />
+    <Content Include="Templates\UX\mcdx\mbextruder\inc\mbExtruder.js" />
+    <Content Include="Templates\UX\mcdx\mbscrollable\css\mbscrollable.css" />
+    <Content Include="Templates\UX\mcdx\mbscrollable\demo.html" />
+    <Content Include="Templates\UX\mcdx\mbscrollable\demo1.html" />
+    <Content Include="Templates\UX\mcdx\mbscrollable\elements\elBgnd.png" />
+    <Content Include="Templates\UX\mcdx\mbscrollable\inc\changeLog.txt" />
+    <Content Include="Templates\UX\mcdx\mbscrollable\inc\mbScrollable.js" />
+    <Content Include="Templates\UX\mcdx\mbscrollable\licenses\GPL-LICENSE.txt" />
+    <Content Include="Templates\UX\mcdx\mbscrollable\licenses\MIT-LICENSE.txt" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\css\prettyPhoto.css" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\fullscreen\1.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\fullscreen\2.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\fullscreen\3.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\fullscreen\4.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\fullscreen\5.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\fullscreen\6.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\fullscreen\high.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\fullscreen\huge.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\fullscreen\wide.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_rounded\btnNext.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_rounded\btnPrevious.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_rounded\contentPattern.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_rounded\default_thumbnail.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_rounded\loader.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_rounded\sprite.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_square\btnNext.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_square\btnPrevious.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_square\contentPattern.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_square\default_thumbnail.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_square\loader.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\dark_square\sprite.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\default\default_thumb.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\default\loader.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\default\sprite.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\default\sprite_next.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\default\sprite_prev.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\default\sprite_x.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\default\sprite_y.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\facebook\btnNext.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\facebook\btnPrevious.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\facebook\contentPatternBottom.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\facebook\contentPatternLeft.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\facebook\contentPatternRight.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\facebook\contentPatternTop.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\facebook\default_thumbnail.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\facebook\loader.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\facebook\sprite.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_rounded\btnNext.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_rounded\btnPrevious.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_rounded\default_thumbnail.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_rounded\loader.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_rounded\sprite.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_square\btnNext.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_square\btnPrevious.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_square\default_thumbnail.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_square\loader.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\prettyPhoto\light_square\sprite.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\thumbnails\flash-logo.png" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\thumbnails\quicktime-logo.gif" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\thumbnails\t_1.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\thumbnails\t_2.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\thumbnails\t_3.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\thumbnails\t_4.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\images\thumbnails\t_5.jpg" />
+    <Content Include="Templates\UX\mcdx\prettyphoto\js\jquery.prettyPhoto.js" />
+    <Content Include="Templates\UX\skin.Sample\img\episerver_logo_inver.png" />
+    <Content Include="Templates\UX\skin.Sample\sample.css" />
+    <Content Include="Templates\UX\skin.Sample\img\background.jpg" />
+    <Content Include="Templates\UX\skin.Sample\img\Episerver_logo.png" />
+    <Content Include="Templates\UX\skin.Sample\img\grid-18px-masked.png" />
+    <Content Include="Templates\UX\skin.Sample\img\home-adv-1.jpg" />
+    <Content Include="Templates\UX\skin.Sample\img\iStock_000012635718Small.jpg" />
+    <Content Include="Templates\UX\skin.Sample\img\iStock_000017532684Small.jpg" />
+    <Content Include="Templates\UX\skin.Sample\img\iStock_000017637477Small.jpg" />
+    <Content Include="Templates\UX\skin.Sample\img\logo.gif" />
+    <Content Include="Templates\UX\skin.Sample\img\mainAdvertise.jpg" />
+    <Content Include="Templates\UX\styles\styles.css" />
+    <Content Include="log4net.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Configs\Mediachase.Search.Filters.config" />
+    <Content Include="connectionStrings.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="episerver.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="EPiServerFramework.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="EPiServerLog.config" />
+    <Content Include="FileSummary.config" />
+    <Content Include="Templates\Sample\MasterPages\StarterDemoDefault.Master" />
+    <Content Include="Templates\UX\bootstrap3\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Templates\UX\bootstrap3\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Templates\UX\bootstrap3\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="appSettings.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Templates\UX\mcdx\mbscrollable\README.md" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51643/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.2.1\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS">
+      <HintPath>..\packages\EPiServer.CMS.UI.Core.7.15.0\lib\net45\CMS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.ApplicationModules">
+      <HintPath>..\packages\EPiServer.Framework.7.14.1\lib\net45\EPiServer.ApplicationModules.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.BaseLibrary">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.BaseLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Business.Commerce">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\EPiServer.Business.Commerce.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Cms.Shell.UI">
+      <HintPath>..\packages\EPiServer.CMS.UI.Core.7.15.0\lib\net45\EPiServer.Cms.Shell.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Commerce.FindSearchProvider">
+      <HintPath>..\packages\EPiServer.Commerce.FindSearchProvider.8.0.1\lib\net45\EPiServer.Commerce.FindSearchProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Commerce.Internal.Migration">
+      <HintPath>..\packages\EPiServer.Commerce.UI.8.0.1\lib\net45\EPiServer.Commerce.Internal.Migration.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Commerce.Shell">
+      <HintPath>..\packages\EPiServer.Commerce.UI.8.0.1\lib\net45\EPiServer.Commerce.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Commerce.Shell.ManagerIntegration">
+      <HintPath>..\packages\EPiServer.Commerce.UI.ManagerIntegration.8.0.1\lib\net45\EPiServer.Commerce.Shell.ManagerIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Commerce.UI">
+      <HintPath>..\packages\EPiServer.Commerce.UI.8.0.1\lib\net45\EPiServer.Commerce.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Configuration">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Data">
+      <HintPath>..\packages\EPiServer.Framework.7.14.1\lib\net45\EPiServer.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Data.Cache">
+      <HintPath>..\packages\EPiServer.Framework.7.14.1\lib\net45\EPiServer.Data.Cache.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Enterprise">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.Enterprise.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Events">
+      <HintPath>..\packages\EPiServer.Framework.7.14.1\lib\net45\EPiServer.Events.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Find">
+      <HintPath>..\packages\EPiServer.Find.8.6.0.1055\lib\net40\EPiServer.Find.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find.Cms">
+      <HintPath>..\packages\EPiServer.Find.Cms.8.6.0.1055\lib\net40\EPiServer.Find.Cms.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find.Framework">
+      <HintPath>..\packages\EPiServer.Find.Framework.8.6.0.1055\lib\net40\EPiServer.Find.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find.Optimizations">
+      <HintPath>..\packages\EPiServer.Find.Cms.8.6.0.1055\lib\net40\EPiServer.Find.Optimizations.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find.Statistics">
+      <HintPath>..\packages\EPiServer.Find.Cms.8.6.0.1055\lib\net40\EPiServer.Find.Statistics.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Find.UI">
+      <HintPath>..\packages\EPiServer.Find.Cms.8.6.0.1055\lib\net40\EPiServer.Find.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="EPiServer.Framework">
+      <HintPath>..\packages\EPiServer.Framework.7.14.1\lib\net45\EPiServer.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.ImageLibrary">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.ImageLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Implementation">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.Implementation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Licensing">
+      <HintPath>..\packages\EPiServer.Framework.7.14.1\lib\net45\EPiServer.Licensing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.LinkAnalyzer">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.LinkAnalyzer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Shell">
+      <HintPath>..\packages\EPiServer.Framework.7.14.1\lib\net45\EPiServer.Shell.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Shell.UI">
+      <HintPath>..\packages\EPiServer.CMS.UI.Core.7.15.0\lib\net45\EPiServer.Shell.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.UI">
+      <HintPath>..\packages\EPiServer.CMS.UI.Core.7.15.0\lib\net45\EPiServer.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.Web.WebControls">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.Web.WebControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.WorkflowFoundation">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.WorkflowFoundation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPiServer.XForms">
+      <HintPath>..\packages\EPiServer.CMS.Core.7.14.1\lib\net45\EPiServer.XForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9.1.8\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Mediachase.BusinessFoundation">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.BusinessFoundation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.BusinessFoundation.Data">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.BusinessFoundation.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Commerce">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Commerce.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Commerce.Marketing.Validators">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Commerce.Marketing.Validators.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Commerce.Plugins.Payment">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Commerce.Plugins.Payment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Commerce.Plugins.Shipping">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Commerce.Plugins.Shipping.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Commerce.Website">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Commerce.Website.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Commerce.Workflow">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Commerce.Workflow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Commerce.Workflow.Activities">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Commerce.Workflow.Activities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.DataProvider">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.DataProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.FileUploader">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.FileUploader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.MetaDataPlus">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.MetaDataPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Search">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Search.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Search.Extensions">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Search.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Search.LuceneSearchProvider">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.Search.LuceneSearchProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.Search.Solr35SearchProvider">
+      <HintPath>..\packages\EPiServer.Commerce.Solr35SearchProvider.8.0.1\lib\net45\Mediachase.Search.Solr35SearchProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Mediachase.SqlDataProvider">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.SqlDataProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mediachase.WebConsoleLib">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Mediachase.WebConsoleLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nsoftware.IBizPay">
+      <HintPath>..\packages\EPiServer.Commerce.Core.8.0.1\lib\net45\nsoftware.IBizPay.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Shell">
+      <HintPath>..\packages\EPiServer.CMS.UI.Core.7.15.0\lib\net45\Shell.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.WebPages">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <!--No need to reference assemblies, but adding to avoid deleting when user rebuild CommerceSample project-->
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+</Project>

@@ -1,0 +1,133 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="StarterDemoDefault.master.cs" Inherits="EPiServer.Commerce.Sample.Templates.Sample.MasterPages.StarterDemoDefault" %>
+<%@ Register Assembly="EPiServer.Framework" Namespace="EPiServer.Framework.Localization" TagPrefix="Localization" %>
+<%@ Register TagPrefix="CMSNav" TagName="SubMenu" Src="../Units/Navigation/SubMenu.ascx" %>
+<%@ Register TagPrefix="CMSNav" TagName="TopMenu" Src="../Units/Navigation/TopMenu.ascx" %>
+<%@ Register TagPrefix="CMSNav" TagName="Toolbar" Src="../Units/Navigation/Toolbar.ascx" %>
+<%@ Register TagPrefix="CMSNav" TagName="NavAccountBar" Src="Controls/NavAccountBar.ascx" %>
+<%@ Register TagPrefix="CMSNav" TagName="MarketSelector" Src="Controls/MarketSelector.ascx" %>
+<!DOCTYPE html>
+<html lang="en">
+<head id="Head1" runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=9">
+    <title>EPiServer - Commerce Sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- Le styles -->
+    <link href="~/templates/UX/bootstrap3/css/bootstrap.css" rel="stylesheet" runat="server">
+
+    <link href="~/templates/UX/mcdx/mbextruder/css/mbExtruder.css" rel="stylesheet" runat="server">
+    <link href="~/templates/UX/mcdx/mbscrollable/css/mbscrollable.css" rel="stylesheet" runat="server">
+    <link href="~/templates/UX/mcdx/css/commerce.css" rel="stylesheet" runat="server">
+    <link href="~/templates/UX/styles/styles.css" rel="stylesheet" runat="server">
+    <!-- Choose a Skin or Brand-->
+    <link href="~/templates/UX/skin.sample/sample.css" rel="stylesheet" runat="server">
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href='<%# Page.ResolveUrl("~/templates/UX/bootstrap3/ico/fav.png") %>'>
+    <link rel="apple-touch-icon" href='<%# Page.ResolveUrl("~/templates/UX/bootstrap3/ico/apple-touch-icon.png") %>'>
+
+
+    <!-- some scripts need to be loaded first -->
+    <script src='<%# Page.ResolveUrl("~/templates/UX/js/jquery.js") %>'></script>
+
+    <EPiServer:RequiredClientResources RenderingArea="Header" ID="RequiredResourcesHeader" runat="server" />
+</head>
+<!-- end bbinclude -->
+<body>
+    <form id="aspnetForm" runat="server">
+    <!-- container -->
+    <div class="container">
+        <!-- #bbinclude "includes/header-primary-nav.html" -->
+        <header>
+            <div class="row C_Logo-Account-Bar">
+                <div class="col-md-2 col-md-push-10 hidden-xs">
+                    <a href="/" target="new">
+                        <img class="pull-right" style="max-width: 136px;" src="~/templates/UX/skin.sample/img/Episerver_logo.png" alt="" runat="server"></a>
+                </div>
+                <div class="col-md-10 col-md-pull-2">
+                    <ul class="nav nav-pills pull-right">
+                        <li>
+                            <a ID="cartLink" runat="server"></a>
+                        </li>
+                        <CMSNav:NavAccountBar ID="NavAccountBarID" runat="server"></CMSNav:NavAccountBar>
+                        <CMSNav:MarketSelector ID="MarketSelectorID" runat="server" />
+                    </ul>
+                </div>
+            </div>
+            <div class="row C_Primary-Navigation">
+                <div class="col-md-12">
+                    <CMSNav:TopMenu ID="TopMenuCtrl" runat="server" />
+                </div>
+            </div>
+        </header>
+        <!-- end bbinclude -->
+        <!-- BEGIN CONTENT BODY OR BUSINESS CONTROL(S) -->
+        <!-- #bbinclude "controls/XXXXXX.html" -->
+        <div class="row">
+            <div class="col-md-12">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <!-- end bbinclude -->
+        <!-- END CONTENT BODY OR BUSINESS CONTROL(S) -->
+        <!-- #bbinclude "includes/footer.html" -->
+        <footer>
+            <div class="row C_Footer-Navigation">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <h4>CUSTOMER SERVICE </h4>
+                        <p>
+                            Contact Us<br />
+                            1-800-THE-BEST
+                        </p>
+                        <p><a class="btn btn-sm btn-info" href="#"><i class="glyphicon glyphicon-envelope"></i> e-Mail us</a> </p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <h4> Shortcuts </h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#"> Customers </a></li>
+                        <li><a href="#"> Press Room </a></li>
+                        <li><a href="#"> Events </a></li>
+                        <li><a href="#"> Privacy Policy </a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h4> Related web sites </h4>
+                    <ul class="list-unstyled">
+                        <li><a href="http://www.episerver.com"> EPiServer </a></li>
+                        <li><a href="http://world.episerver.com"> EPiServer Community </a></li>
+                        <li><a href="http://license.episerver.com"> EPiServer License Center </a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h4> Terms of Use </h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#"> Acceptance of Terms </a></li>
+                        <li><a href="#"> Use of Services </a></li>
+                        <li><a href="#"> Links to Third Party Sites </a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+        <!-- end bbinclude -->
+    </div>
+    <!-- #bbinclude "includes/scripts.html" -->
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<%= Page.ResolveUrl("~/templates/UX/bootstrap3/js/bootstrap.js") %>"></script>
+    <script src="<%= Page.ResolveUrl("~/templates/UX/js/sample_plugin.js") %>"></script>
+    <!-- end bbinclude -->
+
+    <EPiServer:RequiredClientResources RenderingArea="Footer" ID="RequiredResourcesFooter" runat="server" />
+    </form>
+</body>
+</html>

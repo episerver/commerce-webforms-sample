@@ -1,0 +1,1 @@
+modulesbin directory is needed by cms but we're not interested in it. This directory should be kept empty.

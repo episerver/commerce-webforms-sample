@@ -1,0 +1,1 @@
+Apps directory is needed by commerce when we are importing but we're not interested in it. This directory should be kept empty.
