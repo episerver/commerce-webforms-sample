@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using EPiServer.Security;
 using Mediachase.Commerce.Orders;
 using Mediachase.Commerce.Security;
 using Mediachase.Commerce.Website;
@@ -25,13 +26,9 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.AccountManagement
         /// </summary>
         private void BindData()
         {
-            if (SecurityContext.Current.CurrentUser == null)
+            if (PrincipalInfo.CurrentPrincipal.Identity.IsAuthenticated)
             {
-                return;
-            }
-            else
-            {
-                var orders = OrderContext.Current.GetPurchaseOrders(SecurityContext.Current.CurrentUserId)
+                var orders = OrderContext.Current.GetPurchaseOrders(PrincipalInfo.CurrentPrincipal.GetContactId())
                            .Where(p => p.Created > DateTime.UtcNow.AddDays(-1 * int.Parse(ddlAvailableOrders.SelectedValue))).ToArray();
 
                 foreach (var order in orders)

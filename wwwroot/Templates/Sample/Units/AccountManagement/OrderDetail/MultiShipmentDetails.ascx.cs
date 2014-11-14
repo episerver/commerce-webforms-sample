@@ -1,7 +1,9 @@
-﻿using Mediachase.Commerce.Customers;
+﻿using EPiServer.Security;
+using Mediachase.Commerce.Customers;
 using Mediachase.Commerce.Orders;
 using System;
 using System.Linq;
+using Mediachase.Commerce.Security;
 
 namespace EPiServer.Commerce.Sample.Templates.Sample.Units.AccountManagement.OrderDetail
 {
@@ -41,7 +43,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.AccountManagement.Ord
 
                 if (address == null)
                 {
-                    var contact = CustomerContext.Current.GetContactById(Mediachase.Commerce.Security.SecurityContext.Current.CurrentUserId);
+                    var contact = PrincipalInfo.CurrentPrincipal.GetCustomerContact();
                     var customerAddresses = CustomerContext.Current.GetAllContactAddresses(contact).ToList();
                     foreach (var customerAddress in customerAddresses)
                         {

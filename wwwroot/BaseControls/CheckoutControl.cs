@@ -1,5 +1,6 @@
 ﻿using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Commerce.UI.Controllers;
+using EPiServer.Security;
 using Mediachase.Commerce;
 using Mediachase.Commerce.Customers;
 using Mediachase.Commerce.Engine.Template;
@@ -91,7 +92,7 @@ namespace EPiServer.Commerce.Sample.BaseControls
         protected void AddNoteToPurchaseOrder(string note, PurchaseOrder purchaseOrder, params string[] parmeters)
         {
             var noteDetail = String.Format(note, parmeters);
-            OrderNotesManager.AddNoteToPurchaseOrder(purchaseOrder, noteDetail, OrderNoteTypes.System, SecurityContext.Current.CurrentUserId);
+            OrderNotesManager.AddNoteToPurchaseOrder(purchaseOrder, noteDetail, OrderNoteTypes.System, PrincipalInfo.CurrentPrincipal.GetContactId());
         }
         /// <summary>
         /// Places the order.
@@ -119,7 +120,7 @@ namespace EPiServer.Commerce.Sample.BaseControls
                     }
                 }
 
-                Cart.CustomerId = SecurityContext.Current.CurrentUserId;
+                Cart.CustomerId = PrincipalInfo.CurrentPrincipal.GetContactId();
                 var po = Cart.SaveAsPurchaseOrder();
 
                 if (_currentContact != null)
@@ -130,7 +131,7 @@ namespace EPiServer.Commerce.Sample.BaseControls
                 }
 
                 // Add note to purchaseOrder
-                AddNoteToPurchaseOrder("New order placed by {0} in {1}", po, SecurityContext.Current.CurrentUserName, "Public site");
+                AddNoteToPurchaseOrder("New order placed by {0} in {1}", po, PrincipalInfo.CurrentPrincipal.Identity.Name, "Public site");
                 po.AcceptChanges();
 
                 PurchaseOrderManager.UpdatePromotionUsage(Cart, po);

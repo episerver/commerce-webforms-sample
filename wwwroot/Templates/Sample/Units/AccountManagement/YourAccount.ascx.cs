@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EPiServer.Security;
 using Mediachase.Commerce.Customers;
 using Mediachase.Commerce.Orders;
 using Mediachase.Commerce.Security;
@@ -26,11 +27,11 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.AccountManagement
         protected void GetOrderInformation()
         {
             //Populate number of order            
-            var purchaseOrders = PurchaseOrder.LoadByCustomer(SecurityContext.Current.CurrentUserId);          
+            var purchaseOrders = PurchaseOrder.LoadByCustomer(PrincipalInfo.CurrentPrincipal.GetContactId());          
             litNumberofOrders.Text = purchaseOrders.Count.ToString();
 
             //Populate most recent order
-            var order = OrderContext.Current.GetMostRecentPurchaseOrder(SecurityContext.Current.CurrentUserId);
+            var order = OrderContext.Current.GetMostRecentPurchaseOrder(PrincipalInfo.CurrentPrincipal.GetContactId());
             litLastOrderDate.Text = order != null ? order.Created.ToString() : "";
         }
 

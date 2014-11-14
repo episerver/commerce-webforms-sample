@@ -1,6 +1,7 @@
 ﻿using EPiServer.Commerce.Sample.BaseControls;
 using EPiServer.Commerce.Sample.Helpers;
 using EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedModules;
+using EPiServer.Security;
 using Mediachase.Commerce.Customers;
 using Mediachase.Commerce.Inventory;
 using Mediachase.Commerce.Orders;
@@ -222,7 +223,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
                     foreach (LineItem lineItem in lineItems)
                     {
                         Shipment shipment = new Shipment();
-                        shipment.CreatorId = SecurityContext.Current.CurrentUserId.ToString();
+                        shipment.CreatorId = PrincipalInfo.CurrentPrincipal.GetContactId().ToString();
                         shipment.Created = DateTime.UtcNow;
                         shipment.AddLineItemIndex(lineItems.IndexOf(lineItem), lineItem.Quantity);
                         shipment.WarehouseCode = lineItem.WarehouseCode;

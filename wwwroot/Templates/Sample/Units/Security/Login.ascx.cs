@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
 using EPiServer.Framework.Localization;
@@ -33,7 +34,8 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.Security
                 return;
             }
 
-            var profile = SecurityContext.Current.CurrentUserProfile as CustomerProfileWrapper;
+            var httpProfile = Context.Profile;
+            var profile = httpProfile == null ? null : new CustomerProfileWrapper(httpProfile);
             if (profile == null)
             {
                 throw new NullReferenceException("profile");
@@ -83,7 +85,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.Security
             }
 
             // Now create an account in the ECF 
-            var customerContact = CustomerContact.CreateInstance(user);
+            var customerContact = CustomerContact.CreateInstance(new GenericPrincipal(new GenericIdentity(emailAddress), null));
             customerContact.FirstName = firstName;
             customerContact.LastName = lastName;
             customerContact.RegistrationSource = String.Format("{0}, {1}", this.Request.Url.Host, SiteContext.Current);

@@ -25,7 +25,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
         {
             base.OnLoad(e);
             //Get active payments, order by ordering (escending)
-            var payments = PaymentManager.GetPaymentMethods(SiteContext.Current.LanguageName).PaymentMethod.AsQueryable().Where(c => c.IsActive);
+            var payments = PaymentManager.GetPaymentMethodsByMarket(_currentMarketService.GetCurrentMarket().MarketId.Value, SiteContext.Current.LanguageName, false).PaymentMethod.AsQueryable();
 
             var paymentList = new List<PaymentMethod>();
             var defaultPayment = payments.OrderByDescending(c => c.Ordering).FirstOrDefault(c => c.IsDefault);
@@ -41,9 +41,6 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             foreach (var paymentRow in payments)
             {
                 var paymentMethod = new PaymentMethod(paymentRow);
-                var marketId = _currentMarketService.GetCurrentMarket().MarketId;
-                if (!paymentMethod.MarketId.Contains(marketId))
-                    continue;
 
                 paymentList.Add(paymentMethod);
                 string controlId;
@@ -71,7 +68,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             // find selected payment gateway:
             IPaymentOption selectedPayment = null;
             Mediachase.Commerce.Orders.Dto.PaymentMethodDto.PaymentMethodRow paymentMethodRow = null;
-            var payments = PaymentManager.GetPaymentMethods(SiteContext.Current.LanguageName);
+            var payments = PaymentManager.GetPaymentMethodsByMarket(_currentMarketService.GetCurrentMarket().MarketId.Value, SiteContext.Current.LanguageName, false);
             for (int i = 0; i < PaymentContent.Controls.Count; i++)
             {
                 Control control = PaymentContent.Controls[i];

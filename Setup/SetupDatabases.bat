@@ -13,7 +13,7 @@ osql -S . -d SampleCmsDb -E -Q "EXEC sp_addrolemember N'db_owner', N'commercesam
 osql -S . -d SampleCommerceDb -E -Q "EXEC sp_adduser @loginame='commercesample'"
 osql -S . -d SampleCommerceDb -E -Q "EXEC sp_addrolemember N'db_owner', N'commercesample'"
 echo Starting CMS Database Install
-osql -S . -d SampleCmsDb -E -b -i "..\packages\EPiServer.CMS.Core.7.14.2\tools\EPiServer.Cms.Core.sql" > setupCmsDb.log
+osql -S . -d SampleCmsDb -E -b -i "..\packages\EPiServer.CMS.Core.7.16.1\tools\EPiServer.Cms.Core.sql" > setupCmsDb.log
 osql -S . -d SampleCmsDb -E -b -i "%windir%\Microsoft.NET\Framework\v3.0\Windows Workflow Foundation\SQL\EN\SqlPersistenceService_Schema.sql"
 osql -S . -d SampleCmsDb -E -b -i "%windir%\Microsoft.NET\Framework\v3.0\Windows Workflow Foundation\SQL\EN\SqlPersistenceService_Logic.sql"
 echo Finshed CMS Database Install please check setupCmsDb.log for any errors

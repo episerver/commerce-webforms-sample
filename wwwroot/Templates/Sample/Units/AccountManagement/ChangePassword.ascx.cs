@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using EPiServer.Security;
 using Mediachase.Commerce.Customers;
 using Mediachase.BusinessFoundation.Data;
 using Mediachase.Commerce.Security;
@@ -23,7 +24,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.AccountManagement
 
         protected void savePassword_Click(object sender, EventArgs e)
         {
-            if (!Membership.ValidateUser(SecurityContext.Current.CurrentUser.UserName, CurrentPassword.Text))
+            if (!Membership.ValidateUser(PrincipalInfo.CurrentPrincipal.Identity.Name, CurrentPassword.Text))
             {
                 passwordError.Text = "Old Password is not valid, please fix and try again";
                 return;
@@ -31,7 +32,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.AccountManagement
 
             try
             {
-                SecurityContext.Current.CurrentUser.ChangePassword(CurrentPassword.Text, NewPassword.Text);
+                Membership.GetUser(PrincipalInfo.CurrentPrincipal.Identity.Name).ChangePassword(CurrentPassword.Text, NewPassword.Text);
                 PasswordSuccessful.Text = "Password changed successfully!";
                 return;
             }

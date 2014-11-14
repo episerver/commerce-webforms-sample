@@ -8,6 +8,7 @@ using EPiServer.Commerce.Sample.BaseControls;
 using EPiServer.Commerce.Sample.Helpers;
 using EPiServer.Core;
 using EPiServer.Editor;
+using EPiServer.Security;
 using EPiServer.Web.Routing;
 using Mediachase.BusinessFoundation.Data.Business;
 using Mediachase.Commerce;
@@ -286,7 +287,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
                 if (ship == null)
                 {
                     ship = Cart.OrderForms[0].Shipments.AddNew();
-                    ship.CreatorId = SecurityContext.Current.CurrentUserId.ToString();
+                    ship.CreatorId = PrincipalInfo.CurrentPrincipal.GetContactId().ToString();
                     ship.Created = DateTime.UtcNow;
 
                     // Add LineItem to Shipment.

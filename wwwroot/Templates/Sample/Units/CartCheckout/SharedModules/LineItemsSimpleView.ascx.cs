@@ -5,6 +5,7 @@ using EPiServer.ServiceLocation;
 using Mediachase.Commerce;
 using Mediachase.Commerce.Catalog;
 using Mediachase.Commerce.Catalog.Managers;
+using Mediachase.Commerce.Marketing;
 using Mediachase.Commerce.Marketing.Objects;
 using Mediachase.Commerce.Orders;
 using Mediachase.Commerce.Website;
@@ -13,9 +14,6 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
-using Mediachase.Commerce.Marketing;
-using EPiServer.Commerce.Catalog.Provider;
-using EPiServer.Core;
 
 
 namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedModules
@@ -107,11 +105,17 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
                     }
                 }
 
+                Session.Remove(Constants.LastCouponCode);
+
                 // If cart is empty, remove it from the database
                 if (CartHelper.IsEmpty)
+                {
                     CartHelper.Delete();
-
-                Session.Remove(Constants.LastCouponCode);
+                }
+                else
+                {
+                    CartHelper.RunWorkflow(Constants.CartValidateWorkflowName);
+                }
 
                 CartHelper.Cart.AcceptChanges();
                 Context.RedirectFast(Request.RawUrl);
