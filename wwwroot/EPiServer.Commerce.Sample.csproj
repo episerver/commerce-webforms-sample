@@ -1357,9 +1357,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EPiServer.CMS.UI.Core.7.16.0\lib\net45\EPiServer.Cms.Shell.UI.dll</HintPath>
     </Reference>
-    <Reference Include="EPiServer.Commerce.FindSearchProvider, Version=8.1.0.304, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
+    <Reference Include="EPiServer.Commerce.FindSearchProvider, Version=8.3.0.330, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EPiServer.Commerce.FindSearchProvider.8.1.0\lib\net45\EPiServer.Commerce.FindSearchProvider.dll</HintPath>
+      <HintPath>..\packages\EPiServer.Commerce.FindSearchProvider.8.3.0\lib\net45\EPiServer.Commerce.FindSearchProvider.dll</HintPath>
     </Reference>
     <Reference Include="EPiServer.Commerce.Internal.Migration">
       <HintPath>..\packages\EPiServer.Commerce.UI.8.3.0\lib\net45\EPiServer.Commerce.Internal.Migration.dll</HintPath>
@@ -1538,9 +1538,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EPiServer.Commerce.Core.8.3.0\lib\net45\Mediachase.Search.LuceneSearchProvider.dll</HintPath>
     </Reference>
-    <Reference Include="Mediachase.Search.Solr35SearchProvider, Version=8.1.0.304, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Mediachase.Search.Solr35SearchProvider, Version=8.3.0.330, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EPiServer.Commerce.Solr35SearchProvider.8.1.0\lib\net45\Mediachase.Search.Solr35SearchProvider.dll</HintPath>
+      <HintPath>..\packages\EPiServer.Commerce.Solr35SearchProvider.8.3.0\lib\net45\Mediachase.Search.Solr35SearchProvider.dll</HintPath>
     </Reference>
     <Reference Include="Mediachase.SqlDataProvider, Version=8.3.0.330, Culture=neutral, PublicKeyToken=41d2e7a615ba286c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
