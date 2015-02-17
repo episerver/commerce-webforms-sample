@@ -61,9 +61,20 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
 
         public override void DataBind()
         {
-            if (CartHelper.IsEmpty)
-                return;
             var billingCurrency = CartHelper.Cart.BillingCurrency;
+            string zeroMoney = new Money(0, billingCurrency).ToString();
+            if (CartHelper.IsEmpty)
+            {
+                OrderSubTotalLineItems.Text = zeroMoney;
+                OrderDiscount.Text = zeroMoney;
+                OrderSubTotal.Text = zeroMoney;
+                shippingDiscount.Text = zeroMoney;
+                shippingTotal.Text = zeroMoney;
+                OrderTotal.Text = zeroMoney;
+                OrderDiscountsMessage.Text = string.Empty;
+                return;
+            }
+            
             OrderSubTotalLineItems.Text = new Money(CartHelper.LineItems.ToArray().Sum(x => x.ExtendedPrice) +
                 CartHelper.LineItems.ToArray().Sum(x => x.OrderLevelDiscountAmount), billingCurrency).ToString();
 
@@ -94,7 +105,6 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             }
             else
             {
-                string zeroMoney = new Money(0, billingCurrency).ToString();
                 shippingDiscount.Text = zeroMoney;
                 shippingTotal.Text = zeroMoney;
                 OrderTotal.Text = new Money(CartHelper.OrderForm.SubTotal, billingCurrency).ToString();

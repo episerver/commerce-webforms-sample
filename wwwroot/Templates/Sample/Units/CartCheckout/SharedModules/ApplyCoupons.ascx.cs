@@ -6,6 +6,7 @@ using Mediachase.Commerce.Marketing;
 using Mediachase.Commerce.Orders;
 using Mediachase.Commerce.Website;
 using Mediachase.Commerce.Website.Helpers;
+using Mediachase.Commerce.Marketing.Managers;
 
 
 namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedModules
@@ -69,12 +70,29 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             if (IsPostBack || string.IsNullOrEmpty(couponCode))
                 return;
 
-            // Return an error message dialog when Coupon code is invalid
-            if (_discounts.Count == 0 || !_discounts.Exists(d => d.DiscountCode.Equals(couponCode, StringComparison.OrdinalIgnoreCase)))
+            
+            if (_discounts.Count == 0)
             {
+                // Return an error message dialog when Coupon code is invalid
                 ErrorManager.GenerateError(string.Format("{0} is an invalid Coupon code.", couponCode));
                 Session.Remove(Constants.LastCouponCode);
             }
+            else if (!_discounts.Exists(d => d.DiscountCode.Equals(couponCode, StringComparison.OrdinalIgnoreCase)))
+            { 
+                
+                var promotion = PromotionManager.GetPromotionDto().Promotion.FirstOrDefault(x => x.CouponCode.Equals(couponCode));
+                if (promotion == null)
+                {
+                    ErrorManager.GenerateError(string.Format("{0} is an invalid Coupon code.", couponCode));
+                }
+                else
+                {
+                    //return error message when the code exists but cannot be combined with the other promotion
+                    ErrorManager.GenerateError(string.Format("{0} cannot be combined with the other promotion on the order.", couponCode));
+                }
+                Session.Remove(Constants.LastCouponCode);
+            }
+  
         }
 
         /// <summary>

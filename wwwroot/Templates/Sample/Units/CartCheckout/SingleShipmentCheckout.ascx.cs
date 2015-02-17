@@ -64,12 +64,6 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
                 return;
             }
 
-            if (CartHelper.IsEmpty)
-            {
-                Context.RedirectFast(GetUrl(Settings.CartPage));
-                return;
-            }
-
             if (CartHelper.OrderForm.LineItems.Count == 0)
             {
                 Context.RedirectFast(ResolveUrl("~/Shopping-Overview/"));
@@ -88,6 +82,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
         {
             if (CartHelper.IsEmpty)
             {
+                Context.RedirectFast(GetUrl(Settings.CartPage));
                 return;
             }
 
@@ -245,6 +240,14 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
                 ErrorManager.GenerateError(ex.Message);
                 return;
             }
+            catch (OrderException ex)
+            {
+                // Rebind LineItems in case item quanlity has been changed after cart valid.
+                LineItemsID.BindData();
+                OrderSubtotalID.DataBind();
+                ErrorManager.GenerateError(ex.Message);
+                return;
+            }
 
             Session.Remove(Constants.LastCouponCode);
 
@@ -389,6 +392,12 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
                     {
                         defaultShippingMethodId = shippingMethod.ShippingMethodId.ToString();
                     }
+                }
+
+                //if the defaultShippingMethodId is still null or empty (because there is no default shipping method), we choose the first shipping method by default
+                if (string.IsNullOrEmpty(defaultShippingMethodId))
+                {
+                    defaultShippingMethodId = shippingMethods.ShippingMethod[0].ShippingMethodId.ToString();
                 }
 
                 shippingOptions.DataSource = dtShippingMethods;

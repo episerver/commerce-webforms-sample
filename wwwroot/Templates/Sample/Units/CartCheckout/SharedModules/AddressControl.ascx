@@ -153,7 +153,7 @@
             <label class="col-md-12 control-label"><asp:CheckBox type="checkbox" ID="AddAddressToContact" runat="server" AutoPostBack="false"/> 
             Save Address to Address Book</label> 
         </div>
-        <div class="form-group row" >
+        <div class="form-group row" id="UseSameAddressContainer" runat="server">
             <label class="col-md-12 control-label"><asp:CheckBox type="checkbox" ID="UseSameAddress" runat="server" AutoPostBack="false"/> 
             Use the same address for <span id="sameAddressTypeText">shipping</span>.</label> 
         </div>

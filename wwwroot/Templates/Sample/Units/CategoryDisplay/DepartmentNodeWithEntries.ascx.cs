@@ -77,7 +77,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CategoryDisplay
                     return;
 
                 var content = (EntryContentBase)listViewDataItem.DataItem;
-                image1.ImageUrl = AssetHelper.GetAssetUrl(content.CommerceMediaCollection);
+                image1.ImageUrl = AssetUrlResolverInstance.GetAssetUrl(content);
 
                 if (content == null)
                 {

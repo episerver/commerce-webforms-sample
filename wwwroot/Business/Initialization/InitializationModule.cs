@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Routing;
-using EPiServer.Business.Commerce;
+﻿using EPiServer.Commerce.Catalog;
+using EPiServer.Commerce.Catalog.ContentTypes;
 using EPiServer.Commerce.Catalog.Linking;
 using EPiServer.Commerce.Routing;
 using EPiServer.Commerce.Sample.Helpers;
@@ -9,9 +7,7 @@ using EPiServer.Framework;
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
 using Mediachase.Commerce;
-using Mediachase.Commerce.Markets;
-using Mediachase.Commerce.Orders.Dto;
-using Mediachase.Commerce.Orders.Managers;
+using System.Web.Routing;
 
 namespace EPiServer.Commerce.Sample.Business.Initialization
 {
@@ -29,6 +25,7 @@ namespace EPiServer.Commerce.Sample.Business.Initialization
             }
 
             AddAssociationGroups(context);
+            SetDefaultGroups(context);
         }
 
         private static void MapRoutes(RouteCollection routes)
@@ -57,6 +54,15 @@ namespace EPiServer.Commerce.Sample.Business.Initialization
                 context.Locate.Advanced.GetInstance<GroupDefinitionRepository<AssociationGroupDefinition>>();
             associationDefinitionRepository.Add(new AssociationGroupDefinition { Name = Constants.CrossSellGroupName });
             associationDefinitionRepository.Add(new AssociationGroupDefinition { Name = Constants.UpSellGroupName });
+        }
+
+        private void SetDefaultGroups(InitializationEngine context)
+        {
+            const string defaultGroup = "default";
+
+            var assetUrlConventions = context.Locate.Advanced.GetInstance<AssetUrlConventions>();
+            assetUrlConventions.AddDefaultGroup<EntryContentBase>(defaultGroup);
+            assetUrlConventions.AddDefaultGroup<NodeContent>(defaultGroup);
         }
     }
 }

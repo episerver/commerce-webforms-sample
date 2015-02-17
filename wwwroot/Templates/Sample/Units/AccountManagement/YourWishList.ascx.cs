@@ -194,7 +194,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.AccountManagement
         /// <returns></returns>
         protected string GetItemImage(LineItem item)
         {
-            return AssetHelper.GetAssetUrl(item.GetCommerceMediaCollection()) ?? string.Empty;
+            return AssetUrlResolverInstance.GetAssetUrl(item.GetEntry()) ?? string.Empty;
         }
         #endregion
 

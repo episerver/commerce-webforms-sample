@@ -4,6 +4,9 @@ using EPiServer.Commerce.Sample.Templates.Sample.PageTypes;
 using EPiServer.Commerce.Sample.Templates.Sample.Units.Navigation;
 using EPiServer.ServiceLocation;
 using Mediachase.Commerce;
+using Mediachase.Commerce.Catalog;
+using EPiServer.Commerce.Catalog;
+using EPiServer.Commerce.Catalog.ContentTypes;
 using Mediachase.Commerce.Catalog.DataSources;
 using Mediachase.Commerce.Catalog.Managers;
 using Mediachase.Commerce.Catalog.Objects;
@@ -20,7 +23,11 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Pages
 {
     public partial class Search : TemplatePage<SearchPage>
     {
-		private const string _allValue = "All";
+        private const string _allValue = "All";
+
+        protected Injected<AssetUrlResolver> AssetUrlResolverInstance { get; set; }
+        protected Injected<ReferenceConverter> ReferenceConverter { get; set; }
+        protected Injected<IContentLoader> ContentLoader { get; set; }
 
         protected override void OnInit(EventArgs e)
         {
@@ -51,7 +58,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Pages
                 var marketId = currentMarketService.GetCurrentMarket().MarketId;
 
                 var language = SiteContext.Current.LanguageName;
-            
+
                 var qs = Request.QueryString;
 
                 var pageSize = (qs[PagingMenu.DefaultShowAllKey] != null) ? 1000 : pagerTop.PageSize;
@@ -95,14 +102,14 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Pages
                         var variation = entry.EntryType.Equals(EntryType.Variation) ? entry : entry.Entries.Entry.FirstOrDefault();
                         pricingInfo.SetEntry(variation);
                     }
-                    
+
                     var commonButtons = listViewDataItem.FindControl("CommonButtons") as CommonButtons;
                     if (commonButtons != null)
                     {
                         commonButtons.SetEntry(entry);
                     }
                 }
-               
+
             }
         }
 
@@ -158,7 +165,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Pages
                 return new Entries();
             }
         }
-        
+
         /// <summary>
         /// Creates the data source.
         /// </summary>
@@ -180,6 +187,18 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Pages
             {
                 lit.Text = value;
             }
+        }
+
+        /// <summary>
+        /// Gets the media url of an entry
+        /// </summary>
+        /// <param name="entry">the entry</param>
+        /// <returns>url</returns>
+        protected string GetMediaUrl(Entry entry)
+        {
+            var contentReference = ReferenceConverter.Service.GetContentLink(entry.CatalogEntryId, CatalogContentType.CatalogEntry, 0);
+            var catalogContent = ContentLoader.Service.Get<EntryContentBase>(contentReference);
+            return catalogContent == null ? string.Empty : AssetUrlResolverInstance.Service.GetAssetUrl(catalogContent);
         }
     }
 

@@ -16,12 +16,15 @@ using EPiServer.Editor;
 using Mediachase.Commerce.Core;
 using EPiServer.Core;
 using EPiServer.Web.Routing;
+using System.Collections.Generic;
 
 
 namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
 {
     public partial class MultiShipmentCheckout : CheckoutControl
     {
+
+
         /// <summary>
         /// Get the single shipment page link.
         /// </summary>
@@ -58,24 +61,14 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
                 return;
             }
 
-            // Need to Set BillingAddress before getting ShippingAddress to get the correct Billing Address.
-            SetBillingAddresses();
-            CreateDataSplitShipment();
+            Initialize();
 
-            foreach (Shipment shipment in Cart.OrderForms[0].Shipments)
+            var errorMessage = Session[Constants.CheckoutCartErrorName] as string;
+            if (!string.IsNullOrEmpty(errorMessage))
             {
-                // Shipping method is "In store pickup", add warehouse address to Cart & Shipment
-                if (ShippingManager.IsHandoffShippingMethod(shipment.ShippingMethodName) && !string.IsNullOrEmpty(shipment.WarehouseCode))
-                {
-                    IWarehouse warehouse = WarehouseHelper.GetWarehouse(shipment.WarehouseCode);
-                    if (warehouse != null && ShouldSetStoreAsPickupAddressForShipment(warehouse, shipment))
-                    {
-                        SetStoreAsPickupAddressForShipment(warehouse, shipment);
-                    }
-                }
+                ErrorManager.GenerateError(errorMessage);
+                Session.Remove(Constants.CheckoutCartErrorName);
             }
-
-            BindDataSplitShipment();
         }
 
         /// <summary>
@@ -88,6 +81,48 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
             CartHelper.Reset();
             Cart.AcceptChanges();
             Context.RedirectFast(GetUrl(Settings.CheckoutPage));
+        }
+
+        /// <summary>
+        /// Merge shipment when shipping address & shipping method is the same.
+        /// </summary>
+        private void MergeShipment()
+        {
+            var form = Cart.OrderForms[0];
+
+            // Combine shipment when input same shipping address & shipping method
+            var shipmentToRemove = new List<Shipment>();
+            for (int i = 0; i < form.Shipments.Count - 1; i++)
+            {
+                for (int j = i + 1; j < form.Shipments.Count; j++)
+                {
+                    if (form.Shipments[i].ShippingAddressId.Equals(form.Shipments[j].ShippingAddressId) &&
+                        form.Shipments[i].ShippingMethodId.Equals(form.Shipments[j].ShippingMethodId))
+                    {
+                        var targetShipment = form.Shipments[i];
+                        var removedShipment = form.Shipments[j];
+                        foreach (var item in removedShipment.LineItemIndexes)
+                        {
+                            var lineItem = form.LineItems[Convert.ToInt32(item)];
+                            if (lineItem != null)
+                            {
+                                // Get quantity with line item id.
+                                targetShipment.AddLineItemIndex(int.Parse(item), Shipment.GetLineItemQuantity(removedShipment, lineItem.LineItemId));
+                                removedShipment.RemoveLineItemIndex(item);
+                            }
+                        }
+                        shipmentToRemove.Add(removedShipment);
+                    }
+                }
+            }
+            foreach (var shipment in shipmentToRemove)
+            {
+                shipment.Delete();
+            }
+
+            OrderGroupWorkflowManager.RunWorkflow(Cart, OrderGroupWorkflowManager.OrderCalculateTotalsWorflowName);
+
+            Cart.AcceptChanges();
         }
 
         /// <summary>
@@ -138,6 +173,9 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
                     shipmentIndex++;
                 }
 
+                // Merge shipments before create payments.
+                MergeShipment();
+
                 foreach (Payment payment in CartHelper.OrderForm.Payments)
                 {
                     payment.Delete();
@@ -155,9 +193,16 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
                 ErrorManager.GenerateError(ex.Message);
                 return;
             }
+            catch (OrderException ex)
+            {
+                //Keep error message before redirect page
+                Session.Add(Constants.CheckoutCartErrorName, ex.Message);
+                Context.RedirectFast(Request.RawUrl);
+                return;
+            }
 
             Session.Remove(Constants.LastCouponCode);
-
+            Session.Remove(Constants.CheckoutCartErrorName);
             // Redirect customer to receipt page
             if (!Request.IsAuthenticated)
             {
@@ -212,8 +257,10 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
             // Create shipment for each lineitem for the first time to demo showcase multishipment.
             if (Cart.OrderForms.Count > 0)
             {
-                var lineItems = Cart.OrderForms[0].LineItems;
-                if (Cart.OrderForms[0].Shipments.Count != lineItems.Count)
+                var lineItems = Cart.OrderForms[0].LineItems.Where(lineItem => !lineItem.IsGiftItem()).ToList();
+                //In case of redirection (eg. from a checkout error), we keep all shipments's status.
+                string error = Session[Constants.CheckoutCartErrorName] as string;
+                if (Cart.OrderForms[0].Shipments.Count != lineItems.Count() && string.IsNullOrEmpty(error))
                 {
                     foreach (MetaObject shipment in Cart.OrderForms[0].Shipments)
                     {
@@ -255,6 +302,31 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
 
                 Cart.AcceptChanges();
             }
+        }
+
+        /// <summary>
+        /// Initialize the page
+        /// </summary>
+        private void Initialize()
+        {
+            // Need to Set BillingAddress before getting ShippingAddress to get the correct Billing Address.
+            SetBillingAddresses();
+            CreateDataSplitShipment();
+
+            foreach (Shipment shipment in Cart.OrderForms[0].Shipments)
+            {
+                // Shipping method is "In store pickup", add warehouse address to Cart & Shipment
+                if (ShippingManager.IsHandoffShippingMethod(shipment.ShippingMethodName) && !string.IsNullOrEmpty(shipment.WarehouseCode))
+                {
+                    IWarehouse warehouse = WarehouseHelper.GetWarehouse(shipment.WarehouseCode);
+                    if (warehouse != null && ShouldSetStoreAsPickupAddressForShipment(warehouse, shipment))
+                    {
+                        SetStoreAsPickupAddressForShipment(warehouse, shipment);
+                    }
+                }
+            }
+
+            BindDataSplitShipment();
         }
         #endregion
 

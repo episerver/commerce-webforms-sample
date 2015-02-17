@@ -21,6 +21,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
     public partial class AddressControl : RendererControlBase<CatalogContentBase>
     {
         private CustomerContact _currentContact;
+        private bool _allowToUseSameAddressForShipping = true;
         private readonly CartHelper _cartHelper = new CartHelper(Cart.DefaultName);
         private readonly CountryDto _countries = CountryManager.GetCountries();
 
@@ -35,6 +36,22 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
         protected bool AllowSaveAddressBook 
         {
             get { return CustomerContext.Current.CurrentContact != null; }
+        }
+
+        /// <summary>
+        /// Flag to indicate whether the "Use the same address for shipping" checkbox should be display or not.
+        /// <remarks>Default value is <c>true</c></remarks>
+        /// </summary>
+        public bool AllowToUseSameAddressForShipping
+        {
+            get
+            {
+                return _allowToUseSameAddressForShipping;
+            }
+            set
+            {
+                _allowToUseSameAddressForShipping = value;
+            }
         }
 
         /// <summary>
@@ -90,6 +107,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             if (!IsPostBack)
             {
                 BindCountries();
+                UseSameAddressContainer.Visible = AllowToUseSameAddressForShipping;
             }
             BindAddresses();
         }

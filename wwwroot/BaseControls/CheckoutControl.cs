@@ -94,12 +94,21 @@ namespace EPiServer.Commerce.Sample.BaseControls
             var noteDetail = String.Format(note, parmeters);
             OrderNotesManager.AddNoteToPurchaseOrder(purchaseOrder, noteDetail, OrderNoteTypes.System, PrincipalInfo.CurrentPrincipal.GetContactId());
         }
+
         /// <summary>
         /// Places the order.
         /// </summary>
         protected void PlaceOrder()
         {
-            MergeShipment();
+            // Make sure that items are still valid before ordering.
+            var workflowResult = OrderGroupWorkflowManager.RunWorkflow(Cart, OrderGroupWorkflowManager.CartValidateWorkflowName);
+            var workflowResultMessage = OrderGroupWorkflowManager.GetWarningsFromWorkflowResult(workflowResult);
+            if (workflowResultMessage.Count() > 0)
+            {
+                Cart.AcceptChanges();
+                // Throw exception in case there are any changed when valid cart.
+                throw new OrderException(workflowResultMessage.Aggregate((current, next) => current + ", " + next));
+            }
 
             // Make sure to execute within transaction
             using (var scope = new Mediachase.Data.Provider.TransactionScope())
@@ -150,7 +159,7 @@ namespace EPiServer.Commerce.Sample.BaseControls
 
                 // Commit changes
                 scope.Complete();
-            }
+           }
         }
         
         /// <summary>
@@ -159,41 +168,6 @@ namespace EPiServer.Commerce.Sample.BaseControls
         private void IncreaseKpi()
         {
             CmoGadgetController.IncreaseOrder(CartHelper.LineItems);
-        }
-
-        /// <summary>
-        /// Merge shipment when shipping address & shipping method is the same.
-        /// </summary>
-        private void MergeShipment()
-        {
-            // Combine shipment when input same shipping address & shipping method
-            var shipmentToRemove = new List<Shipment>();
-            for (int i = 0; i < Cart.OrderForms[0].Shipments.Count - 1; i++)
-            {
-                for (int j = i + 1; j < Cart.OrderForms[0].Shipments.Count; j++)
-                {
-                    if (Cart.OrderForms[0].Shipments[i].ShippingAddressId.Equals(Cart.OrderForms[0].Shipments[j].ShippingAddressId) &&
-                        Cart.OrderForms[0].Shipments[i].ShippingMethodId.Equals(Cart.OrderForms[0].Shipments[j].ShippingMethodId))
-                    {
-                        var targetShipment = Cart.OrderForms[0].Shipments[i];
-                        var removedShipment = Cart.OrderForms[0].Shipments[j];
-                        foreach (var item in removedShipment.LineItemIndexes)
-                        {
-                            targetShipment.AddLineItemIndex(int.Parse(item), Shipment.GetLineItemQuantity(removedShipment, int.Parse(item)));
-                            removedShipment.RemoveLineItemIndex(item);
-                        }
-                        shipmentToRemove.Add(removedShipment);
-                    }
-                }
-            }
-            foreach (var shipment in shipmentToRemove)
-            {
-                shipment.Delete();
-            }
-
-            OrderGroupWorkflowManager.RunWorkflow(Cart, OrderGroupWorkflowManager.OrderCalculateTotalsWorflowName);
-
-            Cart.AcceptChanges();
         }
 
         /// <summary>

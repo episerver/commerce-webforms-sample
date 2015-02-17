@@ -2,6 +2,7 @@
 <%@ Register Src="SharedModules/OrderSubtotalSimpleView.ascx" TagName="OrderSubtotal" TagPrefix="cart" %>
 <%@ Register Src="SharedModules/PaymentOptions.ascx" TagName="PaymentOptions" TagPrefix="checkout" %>
 <%@ Register Src="~/Templates/Sample/Units/CartCheckout/SharedModules/ApplyCoupons.ascx" TagName="ApplyCoupons" TagPrefix="cart" %>
+<%@ Register Src="~/Templates/Sample/Units/CartCheckout/SharedModules/ErrorModule.ascx" TagPrefix="cart" TagName="ErrorModule" %>
 <%@ Register Src="~/Templates/Sample/Units/CartCheckout/SharedModules/ErrorModalModule.ascx" TagPrefix="cart" TagName="ErrorModalModule" %>
 <%@ Register Src="~/Templates/Sample/Units/CartCheckout/SharedModules/SplitShipmentControl.ascx" TagPrefix="cart" TagName="SplitShipmentControl" %>
 <%@ Register Src="~/Templates/Sample/Units/CartCheckout/SharedModules/CartAddressView.ascx" TagPrefix="cart" TagName="CartAddressView" %>
@@ -11,6 +12,7 @@
     <a class="btn btn-link" href="<%=SingleShipmentPageUrl %>" >Ship Items to One Address</a>
 </div>
 
+<cart:ErrorModule runat="server" id="ErrorModule" />
 <cart:ErrorModalModule runat="server" id="ErrorModalModule" />
 <div class="row C_Billing-Shipping-Addresses">
     <div class="col-md-12">
@@ -46,4 +48,4 @@
     <asp:LinkButton ID="goToCheckout" runat="server" CssClass="btn btn-primary col-xs-12 col-sm-2 col-sm-push-8" Text="Place Order" UseSubmitBehavior="true" OnClick="Order_Click"></asp:LinkButton>
 </div>
 
-<cart:AddressControl ID="Addresses" runat="server"></cart:AddressControl>
+<cart:AddressControl ID="Addresses" runat="server" AllowToUseSameAddressForShipping="false"></cart:AddressControl>

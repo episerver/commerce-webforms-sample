@@ -39,6 +39,11 @@ namespace EPiServer.Commerce.Sample.BaseControls
                 Money shipmentDiscount = new Money(0, currency);
                 foreach (ShipmentDiscount discount in shipment.Discounts)
                 {
+                    // We won't show ShipmentRateCalculation discount to user.
+                    if (SkipShipmentRateCalculation(discount))
+                    {
+                        continue;
+                    }
                     shipmentDiscount += new Money(discount.DiscountValue, currency);
                     shippingDiscountsMessage.Append(String.Format("<strong>{0}</strong><br />", discount.DisplayMessage.ToHtmlEncode()));
                 }
@@ -84,6 +89,12 @@ namespace EPiServer.Commerce.Sample.BaseControls
             }
 
             return retVal;
+        }
+
+        private bool SkipShipmentRateCalculation(ShipmentDiscount discount)
+        {
+            string discountName = "@ShipmentSkipRateCalc";
+            return discount.DiscountName.Equals(discountName);
         }
     }
 }

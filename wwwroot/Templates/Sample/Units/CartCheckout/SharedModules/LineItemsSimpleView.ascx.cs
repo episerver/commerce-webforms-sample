@@ -158,6 +158,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             if (CartHelper.IsEmpty)
                 CartHelper.Delete();
 
+            cart.RunWorkflow(Constants.CartValidateWorkflowName);
             // Save changes
             cart.Cart.AcceptChanges();
 
@@ -191,11 +192,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             {
                 foreach (var item in CartHelper.LineItems)
                 {
-                    var discounts = from Discount discount in item.Discounts
-                                    where discount.DiscountName.EndsWith(":Gift")
-                                    select discount;
-
-                    if (discounts.Any())
+                    if (item.IsGiftItem())
                     {
                         ErrorManager.GenerateError(string.Format("[{0}]: {1}", item.DisplayName, "You can not change the quality of items of gift promotion"));
                         return;
@@ -355,7 +352,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
         /// <summary>
         /// Default bind data method.
         /// </summary>
-        private void BindData()
+        public void BindData()
         {
             var isEmpty = CartHelper.IsEmpty;
 
@@ -378,10 +375,10 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             if (!isEmpty)
             {
                 _promotionResult = CartHelper.GetPromotions();
-
-                lvCartItems.DataSource = CartHelper.LineItems;
-                lvCartItems.DataBind();
             }
+           
+            lvCartItems.DataSource = CartHelper.LineItems;
+            lvCartItems.DataBind();
         }
 
         /// <summary>
@@ -391,7 +388,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
         /// <returns></returns>
         protected string GetItemImage(LineItem item)
         {
-            return AssetHelper.GetAssetUrl(item.GetCommerceMediaCollection()) ?? string.Empty;
+            return AssetUrlResolverInstance.GetAssetUrl(item.GetEntry()) ?? string.Empty;
         }
     }
 }

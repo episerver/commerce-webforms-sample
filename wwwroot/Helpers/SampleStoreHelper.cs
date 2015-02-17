@@ -59,8 +59,7 @@ namespace EPiServer.Commerce.Sample.Helpers
             }
 
             // Check Warehouse Inventory status
-            if (warehouseInventory.InventoryStatus == InventoryTrackingStatus.Disabled ||
-                warehouseInventory.InventoryStatus == InventoryTrackingStatus.Ignored)
+            if (warehouseInventory.InventoryStatus == InventoryTrackingStatus.Disabled)
             {
                 errorMessage = "NoError";
                 return true;

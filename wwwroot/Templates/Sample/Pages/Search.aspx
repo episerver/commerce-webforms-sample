@@ -76,7 +76,7 @@
                     <div class="row row-border">
                         <div class="col-sm-2">
                             <asp:HyperLink runat="server" CssClass=""  NavigateUrl='<%# ((Entry)Container.DataItem).GetProductLink(ContentLanguage.PreferredCulture.Name)%>'>
-                                <img src= "<%# AssetHelper.GetAssetUrl((Entry)(Container.DataItem))%>" class="img-responsive" /></a>
+                                <img src= "<%# GetMediaUrl((Entry)(Container.DataItem))%>" class="img-responsive" /></a>
                             </asp:HyperLink>
                         </div>
                         <div class="col-sm-7">

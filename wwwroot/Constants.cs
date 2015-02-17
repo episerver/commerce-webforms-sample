@@ -80,5 +80,10 @@ namespace EPiServer.Commerce.Sample
         /// The "Accessories" group name
         /// </summary>
         public const string UpSellGroupName = "UpSell";
+
+        /// <summary>
+        /// The checkout cart error
+        /// </summary>
+        public const string CheckoutCartErrorName = "CheckoutCartError";
     }
 }

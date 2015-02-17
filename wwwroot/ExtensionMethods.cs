@@ -63,6 +63,11 @@ namespace EPiServer.Commerce.Sample
             return GetEntryContent<EntryContentBase>(lineItem).CommerceMediaCollection;
         }
 
+        public static EntryContentBase GetEntry(this LineItem lineItem)
+        {
+            return GetEntryContent<EntryContentBase>(lineItem);
+        }
+
         /// <summary>
         /// Gets the content of the entry by code.
         /// </summary>
@@ -207,6 +212,18 @@ namespace EPiServer.Commerce.Sample
                 PreparePromotion(helper, entry, checkEntryLevelDiscountLimit);
             }
             return helper.PromotionContext.PromotionResult;
+        }
+
+        /// <summary>
+        /// Determines whether the specified line item is gift line item.
+        /// </summary>
+        /// <param name="lineItem">The line item.</param>
+        /// <returns>
+        /// 	<c>true</c> if the line item is gift item; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsGiftItem(this LineItem lineItem)
+        {
+            return lineItem.Discounts.Cast<LineItemDiscount>().Any(item => item.DiscountName.EndsWith(":Gift"));
         }
 
 

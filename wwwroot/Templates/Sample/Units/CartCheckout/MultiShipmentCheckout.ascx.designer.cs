@@ -13,6 +13,15 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout {
     public partial class MultiShipmentCheckout {
         
         /// <summary>
+        /// ErrorModule control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedModules.ErrorModule ErrorModule;
+        
+        /// <summary>
         /// ErrorModalModule control.
         /// </summary>
         /// <remarks>
