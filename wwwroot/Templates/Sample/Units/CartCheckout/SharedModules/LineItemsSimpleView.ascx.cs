@@ -6,6 +6,8 @@ using Mediachase.Commerce;
 using Mediachase.Commerce.Catalog;
 using Mediachase.Commerce.Catalog.Managers;
 using Mediachase.Commerce.Marketing;
+using Mediachase.Commerce.Marketing.Dto;
+using Mediachase.Commerce.Marketing.Managers;
 using Mediachase.Commerce.Marketing.Objects;
 using Mediachase.Commerce.Orders;
 using Mediachase.Commerce.Website;
@@ -21,7 +23,6 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
     public partial class LineItemsSimpleView : RendererControlBase<CatalogContentBase>
     {
         private readonly CartHelper _cartHelper = new CartHelper(Cart.DefaultName);
-        private PromotionResult _promotionResult;
         private readonly IMarket _currentMarket = ServiceLocator.Current.GetInstance<ICurrentMarket>().GetCurrentMarket();
 
         /// <summary>
@@ -59,6 +60,13 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
 
             if (!IsPostBack)
             {
+                //Validate the cart before binding data
+                if (!CartHelper.IsEmpty)
+                {
+                    CartHelper.Cart.ProviderId = "FrontEnd";
+                    CartHelper.RunWorkflow(Constants.CartValidateWorkflowName);
+                    CartHelper.Cart.AcceptChanges();
+                }
                 BindData();
             }
         }
@@ -112,11 +120,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
                 {
                     CartHelper.Delete();
                 }
-                else
-                {
-                    CartHelper.RunWorkflow(Constants.CartValidateWorkflowName);
-                }
-
+                
                 CartHelper.Cart.AcceptChanges();
                 Context.RedirectFast(Request.RawUrl);
             }
@@ -146,7 +150,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
 
                 var qty = item.Quantity;
                 var helper = new CartHelper(CartHelper.WishListName);
-                var entry = CatalogContext.Current.GetCatalogEntry(item.CatalogEntryId, new CatalogEntryResponseGroup(CatalogEntryResponseGroup.ResponseGroup.CatalogEntryInfo));
+                var entry = CatalogContext.Current.GetCatalogEntry(item.Code, new CatalogEntryResponseGroup(CatalogEntryResponseGroup.ResponseGroup.CatalogEntryInfo));
                 if (entry == null)
                     continue;
 
@@ -203,15 +207,13 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
                         if (item.Quantity != newQuantity)
                         {
                             var errorMessage = "";
-                            var entry = CatalogContext.Current.GetCatalogEntry(item.CatalogEntryId,
+                            var entry = CatalogContext.Current.GetCatalogEntry(item.Code,
                                 new CatalogEntryResponseGroup(CatalogEntryResponseGroup.ResponseGroup.CatalogEntryInfo |
                                     CatalogEntryResponseGroup.ResponseGroup.Inventory));
 
                             if (SampleStoreHelper.AllowAddToCart(CartHelper.Cart, entry, true, newQuantity, item.WarehouseCode, out errorMessage))
                             {
                                 item.Quantity = newQuantity;
-                                CartHelper.Cart.ProviderId = "FrontEnd";
-                                CartHelper.RunWorkflow(Constants.CartValidateWorkflowName);
                                 CartHelper.Cart.AcceptChanges();
                             }
                             else
@@ -307,24 +309,14 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
                 if (lit != null)
                 {
                     var itemDiscounts = "";
-
-                    if (_promotionResult.PromotionRecords.Count > 0)
-                        foreach (var record in _promotionResult.PromotionRecords)
+                    if (li.Discounts.Count > 0)
+                    {
+                        foreach (var record in li.Discounts.Cast<LineItemDiscount>())
                         {
-                            var recordItem = record.AffectedEntriesSet.Entries.FirstOrDefault(item => item.CatalogEntryCode == li.CatalogEntryId);
-                            if ((recordItem != null) && (recordItem.Quantity > 0))
-                            {
-                                var promotionLanguage = record.PromotionItem.DataRow.GetPromotionLanguageRows().FirstOrDefault().LanguageCode;
-                                var defaultMarketLanguage = _currentMarket.DefaultLanguage.ToString();
-                                var discountAmountLit = record.PromotionReward.AmountType.Equals(Constants.AmountTypeValueBased) ? new Money(record.PromotionReward.AmountOff, CartHelper.Cart.BillingCurrency).ToString() :
-                                    record.PromotionReward.AmountOff.ToString() + "%";
-
-                                itemDiscounts += (promotionLanguage == defaultMarketLanguage) ?
-                                    (String.Format("<strong>{0}</strong><span> | Value: </span>{1}<br />", record.PromotionItem.DataRow.GetPromotionLanguageRows().FirstOrDefault().DisplayName.ToHtmlEncode(), discountAmountLit)) :
-                                                                                                (String.Format("<strong>{0}</strong><span> | Value: </span>{1}<br />", record.PromotionItem.DataRow.Name, discountAmountLit));
-                            }
+                            var discountAmountLit =  new Money(record.DiscountValue, CartHelper.Cart.BillingCurrency).ToString()  + (record.DiscountName.Contains("ValueBased") ? "" : "%");
+                            itemDiscounts += String.Format("<strong>{0}</strong><span> | Value: </span>{1}<br />", record.DisplayMessage.ToHtmlEncode(), discountAmountLit);
                         }
-
+                    }
                     lit.Text = itemDiscounts;
                 }
             }
@@ -340,7 +332,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             if (linkButton != null)
             {
                 if (lvDataItem.DataItem != null)
-                    linkButton.Visible = !((LineItem)lvDataItem.DataItem).CatalogEntryId.StartsWith("@");
+                    linkButton.Visible = !((LineItem)lvDataItem.DataItem).Code.StartsWith("@");
             }
 
             lit = e.Item.FindControl("WarehouseName") as Literal;
@@ -371,12 +363,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
                 if (isEmpty)
                     CartHelper.Delete();
             }
-
-            if (!isEmpty)
-            {
-                _promotionResult = CartHelper.GetPromotions();
-            }
-           
+            
             lvCartItems.DataSource = CartHelper.LineItems;
             lvCartItems.DataBind();
         }

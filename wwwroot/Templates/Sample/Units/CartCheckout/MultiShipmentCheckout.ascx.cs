@@ -120,7 +120,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout
                 shipment.Delete();
             }
 
-            OrderGroupWorkflowManager.RunWorkflow(Cart, OrderGroupWorkflowManager.OrderCalculateTotalsWorflowName);
+            OrderGroupWorkflowManager.RunWorkflow(Cart, OrderGroupWorkflowManager.OrderCalculateTotalsWorkflowName);
 
             Cart.AcceptChanges();
         }

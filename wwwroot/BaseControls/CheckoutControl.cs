@@ -100,6 +100,12 @@ namespace EPiServer.Commerce.Sample.BaseControls
         /// </summary>
         protected void PlaceOrder()
         {
+            // restore coupon code to context
+            string couponCode = Session[Constants.LastCouponCode] as string;
+            if (!String.IsNullOrEmpty(couponCode))
+            {
+                MarketingContext.Current.AddCouponToMarketingContext(couponCode);
+            }
             // Make sure that items are still valid before ordering.
             var workflowResult = OrderGroupWorkflowManager.RunWorkflow(Cart, OrderGroupWorkflowManager.CartValidateWorkflowName);
             var workflowResultMessage = OrderGroupWorkflowManager.GetWarningsFromWorkflowResult(workflowResult);
@@ -134,8 +140,6 @@ namespace EPiServer.Commerce.Sample.BaseControls
 
                 if (_currentContact != null)
                 {
-                    _currentContact.LastOrder = po.Created;
-                    _currentContact.SaveChanges();
                     Cart.CustomerName = _currentContact.FullName;
                 }
 

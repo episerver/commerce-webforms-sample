@@ -29,7 +29,7 @@ namespace EPiServer.Commerce.Sample.Helpers
             {
                 if (cart.OrderForms.Count > 0)
                 {
-                    var lineItem = cart.OrderForms[0].LineItems.Cast<LineItem>().SingleOrDefault(l => l.CatalogEntryId == entry.ID);
+                    var lineItem = cart.OrderForms[0].LineItems.Cast<LineItem>().SingleOrDefault(l => l.Code == entry.ID);
                     if (lineItem != null)
                     {
                         quantity += lineItem.Quantity;

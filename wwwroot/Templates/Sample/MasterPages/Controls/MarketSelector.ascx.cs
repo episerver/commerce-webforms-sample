@@ -78,7 +78,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.MasterPages.Controls
             if (contentLink != null)
             {
                 string queryString = Request.Url.Query;
-                Context.RedirectFast(new UrlResolver().GetUrl(contentLink, ContentLanguage.PreferredCulture.Name) + queryString);
+                Context.RedirectFast(UrlResolver.Current.GetUrl(contentLink, ContentLanguage.PreferredCulture.Name) + queryString);
             }
             else
             {

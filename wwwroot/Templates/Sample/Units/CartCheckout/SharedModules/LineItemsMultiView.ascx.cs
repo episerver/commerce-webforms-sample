@@ -87,7 +87,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
                     if (_promotionResult != null && _promotionResult.PromotionRecords.Count > 0)
                         foreach (var record in _promotionResult.PromotionRecords)
                         {
-                            var recordItem = record.AffectedEntriesSet.Entries.FirstOrDefault(item => item.CatalogEntryCode == li.CatalogEntryId);
+                            var recordItem = record.AffectedEntriesSet.Entries.FirstOrDefault(item => item.CatalogEntryCode == li.Code);
                             if ((recordItem != null) && (recordItem.Quantity > 0))
                             {
                                 var promotionLanguage = record.PromotionItem.DataRow.GetPromotionLanguageRows().FirstOrDefault().LanguageCode;
@@ -115,7 +115,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
             if (linkButton != null)
             {
                 if (lvDataItem.DataItem != null)
-                    linkButton.Visible = !((LineItem)lvDataItem.DataItem).CatalogEntryId.StartsWith("@");
+                    linkButton.Visible = !((LineItem)lvDataItem.DataItem).Code.StartsWith("@");
             }
 
             lit = e.Item.FindControl("WarehouseName") as Literal;

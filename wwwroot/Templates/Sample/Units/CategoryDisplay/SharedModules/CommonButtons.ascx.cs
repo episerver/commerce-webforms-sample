@@ -69,10 +69,6 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CategoryDisplay.Share
             }
 
             cart.AddEntry(entry, 1, false, warehouseCode, new[] { wishList });
-
-            cart.RunWorkflow(Constants.CartValidateWorkflowName);
-            cart.Cart.AcceptChanges();
-
             Context.RedirectFast(GetUrl(Settings.CartPage));
         }
 

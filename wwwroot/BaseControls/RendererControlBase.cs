@@ -131,7 +131,7 @@ namespace EPiServer.Commerce.Sample.BaseControls
         protected IEnumerable<TCatalogContentBase> ForVisitor<TCatalogContentBase>(Func<IEnumerable<TCatalogContentBase>> action)
             where TCatalogContentBase : CatalogContentBase
         {
-            return FilterForVisitor.Filter(action()).Cast<TCatalogContentBase>();
+            return FilterCatalogContent.Filter(action()).Cast<TCatalogContentBase>();
         }
 
         protected SettingsBlock Settings

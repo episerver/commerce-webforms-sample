@@ -92,7 +92,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.AccountManagement
                     var succesfullyAdded = false;
                     if (lineItem != null)
                     {
-                        var entry = CatalogContext.Current.GetCatalogEntry(lineItem.CatalogEntryId, 
+                        var entry = CatalogContext.Current.GetCatalogEntry(lineItem.Code, 
                             new CatalogEntryResponseGroup(CatalogEntryResponseGroup.ResponseGroup.CatalogEntryInfo | 
                                 CatalogEntryResponseGroup.ResponseGroup.Inventory));
 
@@ -108,8 +108,6 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.AccountManagement
 
                             cart.AddEntry(entry, lineItem.Quantity, false, lineItem.WarehouseCode,
                                 new CartHelper[] { });
-
-                            cart.RunWorkflow(Constants.CartValidateWorkflowName);
 
                             lineItem.Delete();
                             succesfullyAdded = true;

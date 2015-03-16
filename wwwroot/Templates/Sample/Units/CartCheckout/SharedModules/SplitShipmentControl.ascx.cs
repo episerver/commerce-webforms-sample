@@ -191,7 +191,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.CartCheckout.SharedMo
                 if (hidden.Value == shippingMethod)
                 {
                     rdo.Checked = true;
-                    if (!shippingMethod.Equals(shippingMethodId))
+                    if (!IsPostBack)
                     {
                         var shipment = _cartHelper.Cart.OrderForms[0].Shipments.ToArray().FirstOrDefault(s => s.Id == SplitShipment.Id);
 

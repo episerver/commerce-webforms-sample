@@ -22,7 +22,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Pages
                 ? _orderGroupId = 0
                 : _orderGroupId = Int32.Parse(Request.QueryString["po"].ToString(CultureInfo.InvariantCulture));
 
-            _orderDetail = OrderContext.Current.GetPurchaseOrder(PrincipalInfo.CurrentPrincipal.GetContactId(), _orderGroupId);
+            _orderDetail = OrderContext.Current.GetPurchaseOrder(_orderGroupId);
 
             if (_orderDetail == null)
                 return;

@@ -109,10 +109,6 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.Units.ProductDetail.SharedM
                 if (entry.IsAvailableInMarket(_marketId))
                 {
                     ch.AddEntry(entry, quantity, false, warehouseCode, new CartHelper[] { wishList });
-                    ch.Cart.ProviderId = "FrontEnd";
-                    ch.RunWorkflow(Constants.CartValidateWorkflowName);
-                    ch.Cart.AcceptChanges();
-
                     Response.Redirect(GetUrl(Settings.CartPage));
                 }
             }

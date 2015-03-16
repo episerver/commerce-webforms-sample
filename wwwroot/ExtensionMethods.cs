@@ -42,7 +42,7 @@ namespace EPiServer.Commerce.Sample
                 return string.Empty;
             }
 
-            var contentLink = ReferenceConverter.Service.GetContentLink(lineItem.CatalogEntryId, CatalogContentType.CatalogEntry);
+            var contentLink = ReferenceConverter.Service.GetContentLink(lineItem.Code, CatalogContentType.CatalogEntry);
             var language = CurrentMarket.Service.GetCurrentMarket().DefaultLanguage.Name;
 
             return UrlResolver.Service.GetUrl(contentLink, language);
@@ -87,7 +87,7 @@ namespace EPiServer.Commerce.Sample
         /// <returns></returns>
         public static T GetEntryContent<T>(this LineItem lineItem) where T: EntryContentBase
         {
-            return GetEntryContent<T>(lineItem.CatalogEntryId);
+            return GetEntryContent<T>(lineItem.Code);
         }
 
 
@@ -99,7 +99,7 @@ namespace EPiServer.Commerce.Sample
         /// <returns></returns>
         public static string GetSkuMetaFieldValueFromLineItem(this LineItem item, string fieldName)
         {
-            var property = GetEntryContent<EntryContentBase>(item.CatalogEntryId).Property[fieldName];
+            var property = GetEntryContent<EntryContentBase>(item.Code).Property[fieldName];
             return (property == null || property.Value == null) ? string.Empty : property.Value.ToString();
         }
 
@@ -206,7 +206,7 @@ namespace EPiServer.Commerce.Sample
             foreach (var li in highPlacedPriceFirst)
             {
                 i++;
-                var entry = CatalogContext.Current.GetCatalogEntry(li.CatalogEntryId);
+                var entry = CatalogContext.Current.GetCatalogEntry(li.Code);
                 // Evaluate conditions
                 var checkEntryLevelDiscountLimit = i == lineItemCount;
                 PreparePromotion(helper, entry, checkEntryLevelDiscountLimit);

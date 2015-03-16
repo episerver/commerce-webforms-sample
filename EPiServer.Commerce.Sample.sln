@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPiServer.Commerce.Sample", "wwwroot\EPiServer.Commerce.Sample.csproj", "{1502E55F-A6D6-490F-8AE9-2E83F768BE44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommerceManager", "CommerceManager\CommerceManager.csproj", "{5874E8F7-8137-42BF-A7E4-92D55A606E53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1502E55F-A6D6-490F-8AE9-2E83F768BE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1502E55F-A6D6-490F-8AE9-2E83F768BE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1502E55F-A6D6-490F-8AE9-2E83F768BE44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5874E8F7-8137-42BF-A7E4-92D55A606E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5874E8F7-8137-42BF-A7E4-92D55A606E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5874E8F7-8137-42BF-A7E4-92D55A606E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5874E8F7-8137-42BF-A7E4-92D55A606E53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

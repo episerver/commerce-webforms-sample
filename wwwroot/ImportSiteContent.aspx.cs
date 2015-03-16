@@ -1,13 +1,18 @@
-using System;
+#region Copyright © 1997-2007 EPiServer AB. All Rights Reserved.
+/*
+This code may only be used according to the EPiServer License Agreement.
+The use of this code outside the EPiServer environment, in whole or in
+parts, is forbidden without prior written permission from EPiServer AB.
+
+EPiServer is a registered trademark of EPiServer AB. For more information 
+see http://www.episerver.com/license or request a copy of the EPiServer 
+License Agreement by sending an email to info@episerver.com
+*/
+#endregion
+
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Hosting;
-using EPiServer.Commerce.Catalog.Provider;
+using EPiServer;
 using EPiServer.Configuration;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
@@ -22,9 +27,18 @@ using log4net;
 using Mediachase.Commerce.BackgroundTasks;
 using Mediachase.Commerce.Catalog.ImportExport;
 using Mediachase.Commerce.Core;
+using Mediachase.Commerce.Customers;
 using Mediachase.Commerce.Extensions;
 using Mediachase.Commerce.Shared;
 using Mediachase.Search;
+using System;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Hosting;
+using System.Linq;
 
 namespace EPiServer.Commerce.Sample
 {
@@ -33,7 +47,7 @@ namespace EPiServer.Commerce.Sample
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
+            
             var setupImporter = ServiceLocator.Current.GetInstance<ContentDataImporter>();
             if (!setupImporter.IsImporting)
             {
@@ -43,9 +57,9 @@ namespace EPiServer.Commerce.Sample
                 var catalogPath = GetFilePathOrDefault("catalog", Path.Combine(root, "StarterDemoDepartmental.zip"));
 
                 var importActionString = HttpContext.Current.Request.QueryString["action"];
-                var importAction = !string.IsNullOrEmpty(importActionString) ?
-                                        (ImportAction)Enum.Parse(typeof(ImportAction), importActionString, true) :
-                                        ImportAction.SiteContent | ImportAction.AssetContent | ImportAction.CatalogContent; // import all by default
+                var importAction = !string.IsNullOrEmpty(importActionString)
+                    ? (ImportAction) Enum.Parse(typeof (ImportAction), importActionString, true)
+                    : ImportAction.SiteContent | ImportAction.AssetContent | ImportAction.CatalogContent; // import all by default
 
                 setupImporter.Url = HttpContext.Current.Request.Url;
                 setupImporter.SiteContentPath = siteContentPath;
@@ -86,6 +100,7 @@ namespace EPiServer.Commerce.Sample
 
     }
 
+    [Flags]
     internal enum ImportAction
     {
         None = 0,
@@ -122,7 +137,7 @@ namespace EPiServer.Commerce.Sample
             {
                 return;
             }
-
+            var customer = CustomerContext.Current.GetContactById(Guid.Empty);
             // instantiate the import job here so that it can capture the current EventContext instance.
             var importJob = new ImportJob(AppContext.Current.ApplicationId, CatalogPackagePath, "Catalog.xml", true);
 
@@ -135,7 +150,7 @@ namespace EPiServer.Commerce.Sample
                     {
                         _progressMessenger.AddProgressMessageText("Importing Site content...", false, 0);
                         doImportEpiData(SiteContentPath);
-                        _progressMessenger.AddProgressMessageText("Done importing Site content.", false, 10);
+                        _progressMessenger.AddProgressMessageText("Done importing Site content.", false, 5);
                     }
 
                     if ((action & ImportAction.AssetContent) == ImportAction.AssetContent)
@@ -154,25 +169,18 @@ namespace EPiServer.Commerce.Sample
 
                     if ((action & ImportAction.CatalogContent) == ImportAction.CatalogContent)
                     {
-                        Action importCatalog = () =>
+                        _progressMessenger.AddProgressMessageText("Importing Catalog content...", false, 20);
+                        Action<IBackgroundTaskMessage> addMessage = msg =>
                         {
-                            _progressMessenger.AddProgressMessageText("Importing Catalog content...", false, 20);
-                            Action<IBackgroundTaskMessage> addMessage = msg =>
-                            {
-                                var isError = msg.MessageType == BackgroundTaskMessageType.Error;
-                                var percent = (int)Math.Round(msg.GetOverallProgress() * 100);
-                                var message = msg.Exception == null
-                                    ? msg.Message
-                                    : string.Format("{0} {1}", msg.Message, msg.ExceptionMessage);
-                                _progressMessenger.AddProgressMessageText(message, isError, percent);
-                            };
-                            importJob.Execute(addMessage, CancellationToken.None);
-
-                            _progressMessenger.AddProgressMessageText("Done importing Catalog content", false, 60);
+                            var isError = msg.MessageType == BackgroundTaskMessageType.Error;
+                            var percent = (int)Math.Round(msg.GetOverallProgress() * 100);
+                            var message = msg.Exception == null
+                                ? msg.Message
+                                : string.Format("{0} {1}", msg.Message, msg.ExceptionMessage);
+                            _progressMessenger.AddProgressMessageText(message, isError, percent);
                         };
-                        //We ignore any events which may be raised in the scope of importing catalog
-                        var _catalogEventHandler = ServiceLocator.Current.GetInstance<CatalogEventHandler>();
-                        _catalogEventHandler.ExecuteWithLocalEventsDisabled(importCatalog);
+                        importJob.Execute(addMessage, CancellationToken.None);
+                        _progressMessenger.AddProgressMessageText("Done importing Catalog content", false, 60);
 
                         //We are running in front-end site context, the metafield update events are ignored, we need to sync manually
                         _progressMessenger.AddProgressMessageText("Syncing metaclasses with content types", false, 60);
@@ -237,6 +245,10 @@ namespace EPiServer.Commerce.Sample
 
         private void doImportEpiData(string importPackagePath)
         {
+            if (string.IsNullOrEmpty(importPackagePath))
+            {
+                return;
+            }
             DataImporter importer = new DataImporter();
             if (importPackagePath.Contains("StarterDemoB2CSite.episerverdata"))
             {
@@ -330,11 +342,21 @@ namespace EPiServer.Commerce.Sample
             siteDefinition.Name = HostingEnvironment.SiteName;
 
             UrlBuilder urlBuilder = new UrlBuilder(Url.GetLeftPart(UriPartial.Authority));
-            urlBuilder.Path = GenericHostingEnvironment.ApplicationVirtualPath;
+            urlBuilder.Path = GenericHostingEnvironment.ApplicationVirtualPath;            
             siteDefinition.SiteUrl = new Uri(VirtualPathUtility.AppendTrailingSlash((string)urlBuilder));
-            siteDefinition.Hosts.Add(new HostDefinition() { Name = urlBuilder.Uri.Authority });
-            siteDefinition.Hosts.Add(new HostDefinition() { Name = SiteDefinition.WildcardHostName });
 
+            //do not add duplicate host names
+            var hostDefinitionExists = siteDefinition.Hosts.Any(x => x.Name.Equals(urlBuilder.Uri.Authority,StringComparison.OrdinalIgnoreCase));
+            if (!hostDefinitionExists)
+            {
+                siteDefinition.Hosts.Add(new HostDefinition() { Name = urlBuilder.Uri.Authority });
+                siteDefinition.Hosts.Add(new HostDefinition() { Name = SiteDefinition.WildcardHostName });
+            }
+            else
+            {
+                _progressMessenger.AddProgressMessageText(string.Format("Warning - Host name '{0}' already exists", urlBuilder.Uri.Authority), false, 0);
+            }
+            
             ServiceLocator.Current.GetInstance<SiteDefinitionRepository>().Save(siteDefinition);
 
             SiteDefinition.Current = siteDefinition;

@@ -38,7 +38,7 @@ namespace EPiServer.Commerce.Sample.Templates.Sample.MasterPages
 
         public string UrlToPage(PageReference pageLink)
         {
-            return new UrlResolver().GetUrl(pageLink, ContentLanguage.PreferredCulture.Name);
+            return UrlResolver.Current.GetUrl(pageLink, ContentLanguage.PreferredCulture.Name);
         }
 
         public virtual PageBase PageBase
