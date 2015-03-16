@@ -22,3 +22,4 @@ For less configuration steps clone the repository to C:\Projects\CommerceWebform
 	* Mediachase.Search.Config
 	* connectionstrings.config
 6.  Browse to http://localhost:51643/ImportSiteContent.aspx to finish installation
+7.  Login as admin / store if authorization is required
